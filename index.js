@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
    res.send("Hello! This is FocusEureka backend");
 });
 
-const runServer = async (PORT) => {
+const runServer = async () => {
    await db.sync({force: true});
    app.listen(PORT, () => {
       console.log(`API listening on PORT ${PORT}`);
