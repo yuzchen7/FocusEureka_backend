@@ -24,17 +24,17 @@ class User extends Model {
 
 User.init(
    {
-      firstName: {
+      first_name: {
          type: DataTypes.STRING,
          allowNull: true,
       },
 
-      lastname: {
+      last_name: {
          type: DataTypes.STRING,
          allowNull: true
       },
 
-      middleName: {
+      middle_name: {
          type: DataTypes.STRING,
          allowNull: true
       },
