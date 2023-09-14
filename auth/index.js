@@ -31,8 +31,8 @@ passport.use(
 // Mounted on /auth
 router.post("/signup", async (req, res, next) => {
     try {
-        const { email, password } = req.body;
-        if (!email || !password) {
+        const { username, password } = req.body;
+        if (!username || !password) {
             return res.status(400).send("Required fields missing");
         }
         const user = await User.create(req.body);
