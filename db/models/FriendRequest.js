@@ -29,7 +29,7 @@ const friend_request = db.define("friend_request", {
       }
    },
 
-   friendid : {
+   targetid : {
       type : DataTypes.INTEGER,
       allowNull : false,
       validate : {
