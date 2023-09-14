@@ -5,7 +5,7 @@ const db = require("./db");
 const session = require("express-session");
 const sequelizeStore = require("connect-session-sequelize")(session.Store);
 const passport = require("passport");
-const User = require("./db/models");
+const {User} = require("./db/models");
 const store = new sequelizeStore({ db });
 
 // Middlewares
@@ -33,13 +33,15 @@ app.use(
 );
 
 passport.serializeUser((user, done) => {
+   console.log(user);
    done(null, user.id);
 });
 
 passport.deserializeUser(async (id, done) => {
+   console.log(id)
    try {
        const user = await User.findByPk(id);
-
+       console.log(user);
        done(null, user);
    } catch (err) {
        done(err);
