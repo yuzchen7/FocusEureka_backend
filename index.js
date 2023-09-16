@@ -53,7 +53,7 @@ app.use(passport.session());
 
 const setupRoutes = () => {
    app.use("/auth",require("./auth"));
-   //app.use("/api", require("./api"));
+   app.use("/api", require("./api"));
    app.get("/", (req, res) => {
        res.send("Hello! This is FocusEureka backend");
    });
