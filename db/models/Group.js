@@ -1,6 +1,8 @@
 const { DataTypes } = require('sequelize');
 const db = require("../db");
 
+const User = require("./user");
+
 const group = db.define("group", {
    id : {
       type : DataTypes.INTEGER,
@@ -11,6 +13,19 @@ const group = db.define("group", {
       validate : {
          isInt : true,
          notEmpty : true
+      }
+   },
+
+   ownerid : {
+      type : DataTypes.INTEGER,
+      allowNull : false,
+      validate : {
+         isInt : true,
+         notEmpty : true
+      },
+      references : {
+         model : User,
+         key : "id"
       }
    },
 
