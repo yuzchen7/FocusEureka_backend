@@ -3,7 +3,7 @@ const {User} = require("../db/models");
 
 router.get("/", async (req, res, next) => {
     try {
-      const allUser = await User.findAll();
+      const allUser = await User.findAll({order:[['id','ASC']]});
   
       allUser
         ? res.status(200).json(allUser)
@@ -26,5 +26,19 @@ router.get("/findUser", async (req, res, next) => {
     }
 });
 
+router.put("/updateInfo", async (req, res, next) => {
+  try{
+    const username = req.body.username;
+    const foundUser = await User.findOne({ where: { username: username } });
+    if(foundUser){
+      await foundUser.update(req.body);
+      (res.status(200).json(foundUser))
+    }else{
+      res.status(404).send("User Not Found");
+    }
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = router;
