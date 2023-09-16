@@ -41,4 +41,19 @@ router.put("/updateInfo", async (req, res, next) => {
   }
 });
 
+router.delete("/deleteUser", async (req, res, next) => {
+  try{
+    const username = req.query.username;
+    const deleteUser = await User.findOne({ where: { username: username } });
+    if(deleteUser){
+      await deleteUser.destroy();
+      res.status(200).send(deleteUser);
+    }else{
+      res.status(404).send("User Not Found");
+    }
+  } catch (error) {
+    next(error);
+  }
+})
+
 module.exports = router;
