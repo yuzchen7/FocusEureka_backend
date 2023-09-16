@@ -7,7 +7,7 @@ const {
 
 const { 
   UserSeed, FriendListSeed, FriendRequestSeed,
-  GroupSeed, GroupMemberSeed,
+   GroupSeed, GroupMemberSeed, GroupRequestSeed
 } = require("./data");
 
 const seed = async () => {
@@ -16,6 +16,7 @@ const seed = async () => {
   await friend_request.bulkCreate(FriendRequestSeed);
   await group.bulkCreate(GroupSeed);
   await group_member.bulkCreate(GroupMemberSeed);
+  await group_request.bulkCreate(GroupRequestSeed);
 };
 
 seed().then(() => process.exit());
