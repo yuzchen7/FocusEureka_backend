@@ -35,6 +35,10 @@ const group = db.define("group", {
       type: DataTypes.STRING
    },
 
+   city : {
+      type: DataTypes.STRING
+   },
+
    state : {
       type: DataTypes.STRING
    },
