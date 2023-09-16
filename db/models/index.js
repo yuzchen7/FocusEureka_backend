@@ -15,6 +15,12 @@ const like_action = require("./LikeAction");
 */
 
 // relationship between user and friend_list
+// User.belongsToMany(User, {
+//    as: 'owner',
+//    through: 'friend_list',
+//    foreignKey: 'ownerid',
+//    otherKey: 'friendid',
+// });
 // User.belongsToMany(User, { 
 //    as: "onwer", 
 //    through: {
