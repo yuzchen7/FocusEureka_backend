@@ -2,7 +2,7 @@ const User = require("./user");
 const friend_list = require("./FriendList");
 const friend_request = require("./FriendRequest");
 const group = require("./Group");
-const group_list = require("./GroupList");
+const group_member = require("./GroupMember");
 const group_request = require("./GroupRequest");
 
 /* 
@@ -47,5 +47,5 @@ const group_request = require("./GroupRequest");
 
 module.exports = {
    User, friend_list, friend_request,
-   group, group_list, group_request,
+   group, group_member, group_request,
 };

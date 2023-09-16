@@ -4,7 +4,7 @@ const db = require("../db");
 const User = require("./user");
 const group = require("./Group");
 
-const group_list = db.define("group_list", {
+const group_member = db.define("group_member", {
    id : {
       type : DataTypes.INTEGER,
       allowNull : false,
@@ -47,4 +47,4 @@ const group_list = db.define("group_list", {
    timestamps : false,
 });
 
-module.exports = group_list;
+module.exports = group_member;
