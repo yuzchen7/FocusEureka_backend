@@ -1,41 +1,22 @@
 const db = require("./db");
-const { User} = require("./db/models");
 
-const UserSeed = [
-  {
-    first_name: "Yuzhuang",
-    last_name: "Chen",
-    username: "Yuzhuang7789@gmail.com",
-    password: "1234567",
-  },
-  {
-    first_name: "Adien",
-    last_name: "Logan",
-    username: "AdienLogan@gmail.com",
-    password: "817381042",
-  },
-  {
-    first_name: "Russell",
-    last_name: "Becker",
-    username: "RussellBecker9989@gmail.com",
-    password: "oioppq1322",
-  },
-  {
-    first_name: "Shuan",
-    last_name: "Vance",
-    username: "Vance_Shuan7789@gmail.com",
-    password: " ",
-  },
-  {
-    first_name: "Jenna",
-    last_name: "Livingston",
-    username: "Jenna9223@gmail.com",
-    password: "iuiweoqc",
-  },
-];
+const { 
+  User, friend_list, friend_request,
+  group, group_member, group_request,
+} = require("./db/models");
+
+const { 
+  UserSeed, FriendListSeed, FriendRequestSeed,
+   GroupSeed, GroupMemberSeed, GroupRequestSeed
+} = require("./data");
 
 const seed = async () => {
   await User.bulkCreate(UserSeed);
+  await friend_list.bulkCreate(FriendListSeed);
+  await friend_request.bulkCreate(FriendRequestSeed);
+  await group.bulkCreate(GroupSeed);
+  await group_member.bulkCreate(GroupMemberSeed);
+  await group_request.bulkCreate(GroupRequestSeed);
 };
 
 seed().then(() => process.exit());
