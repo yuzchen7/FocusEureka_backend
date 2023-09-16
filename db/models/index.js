@@ -4,6 +4,7 @@ const friend_request = require("./FriendRequest");
 const group = require("./Group");
 const group_member = require("./GroupMember");
 const group_request = require("./GroupRequest");
+const like_action = require("./LikeAction");
 
 /* 
    the relationship between user and friend_list, friend_request 
@@ -48,4 +49,5 @@ const group_request = require("./GroupRequest");
 module.exports = {
    User, friend_list, friend_request,
    group, group_member, group_request,
+   like_action,
 };
