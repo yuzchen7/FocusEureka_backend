@@ -17,20 +17,7 @@ const group_request = db.define("group_request", {
       }
    },
 
-   owner_id : {
-      type : DataTypes.INTEGER,
-      allowNull : false,
-      validate : {
-         isInt : true,
-         notEmpty : true
-      },
-      references : {
-         model : User,
-         key : "id"
-      }
-   }, 
-
-   target_id : {
+   request_id : {
       type : DataTypes.INTEGER,
       allowNull : false,
       validate : {
