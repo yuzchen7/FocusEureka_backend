@@ -5,6 +5,7 @@ const group = require("./Group");
 const group_member = require("./GroupMember");
 const group_request = require("./GroupRequest");
 const like_action = require("./LikeAction");
+const post = require("./Post");
 
 /* 
    some relationship are state in the db models js file, which is Enforcing a foreign key 
@@ -23,5 +24,5 @@ User.belongsToMany(User, {
 module.exports = {
    User, friend_list, friend_request,
    group, group_member, group_request,
-   like_action,
+   like_action, post
 };
