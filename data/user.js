@@ -6,6 +6,12 @@ const UserSeed = [
       password: "1234567",
    },
    {
+      first_name: "Kaifeng",
+      last_name: "Yu",
+      username: "Kaifeng99890@gmail.com",
+      password: "0090901",
+   },
+   {
       first_name: "Adien",
       last_name: "Logan",
       username: "AdienLogan@gmail.com",

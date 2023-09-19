@@ -2,12 +2,24 @@ const { DataTypes } = require("sequelize");
 const db = require("../db");
 
 const User = require("./user");
+const group = require("./Group");
 
-const friend_list = db.define("friend_list", {
-   ownerid : {
+const group_member = db.define("group_member", {
+   id : {
       type : DataTypes.INTEGER,
       allowNull : false,
+      unique : true,
       primaryKey : true,
+      autoIncrement : true,
+      validate : {
+         isInt : true,
+         notEmpty : true
+      }
+   },
+
+   member_id : {
+      type : DataTypes.INTEGER,
+      allowNull : false,
       validate : {
          isInt : true,
          notEmpty : true
@@ -18,22 +30,21 @@ const friend_list = db.define("friend_list", {
       }
    },
 
-   friendid : {
+   group_id : {
       type : DataTypes.INTEGER,
       allowNull : false,
-      primaryKey : true,
       validate : {
          isInt : true,
          notEmpty : true
       },
       references : {
-         model : User,
+         model : group,
          key : "id"
       }
    }
 
 }, {
-   timestamps : false
+   timestamps : false,
 });
 
-module.exports = friend_list;
+module.exports = group_member;
