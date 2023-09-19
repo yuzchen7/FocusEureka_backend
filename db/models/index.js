@@ -21,6 +21,7 @@ User.belongsToMany(User, {
    otherKey: 'friendid',
 });
 
+
 module.exports = {
    User, friend_list, friend_request,
    group, group_member, group_request,

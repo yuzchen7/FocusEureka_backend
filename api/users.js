@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, friend_list } = require("../db/models");
+const {User,friend_list} = require("../db/models");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -59,21 +59,13 @@ router.delete("/deleteUser", async (req, res, next) => {
 router.get("/friendList", async (req, res, next) => {
   try {
     const id = req.query.id;
-    const friendList = await User.findAll({
-      include: [
-        {
-          model: User,
-          as: 'Friends',
-          through: friend_list,
-          foreignKey: 'ownerid',
-          otherKey: 'friendid',
-        },
-      ],
-    })
-    friendList ?
+    const friendList = await friend_list.findAll({include: User,
+       where:{ownerid:id}
+    });
+    friendList?
       res.status(200).json(friendList)
-      : res.status(404).send("Friend List Not Found");
-  } catch (error) {
+    : res.status(404).send("Friend List Not Found");
+  }catch (error) {
     next(error);
   }
 })
