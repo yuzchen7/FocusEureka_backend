@@ -7,44 +7,18 @@ const group_request = require("./GroupRequest");
 const like_action = require("./LikeAction");
 
 /* 
-   the relationship between user and friend_list, friend_request 
-   are state in the db models js file, which is Enforcing a foreign key 
-   reference withoutconstraints.
+   some relationship are state in the db models js file, which is Enforcing a foreign key 
+   reference without constraints.
    documentation @see: 
       https://sequelize.org/docs/v6/other-topics/constraints-and-circularities/#enforcing-a-foreign-key-reference-without-constraints
 */
 
-// relationship between user and friend_list
-// User.belongsToMany(User, { 
-//    as: "onwer", 
-//    through: {
-//       model : friend_list
-//    }, 
-//    foreignKey: 'userid'
-// });
-// User.belongsToMany(User, { 
-//    as: "friend", 
-//    through: {
-//       model : friend_list
-//    }, 
-//    foreignKey: 'friendid' 
-// });
-
-// relationship between user and friend_request
-// User.belongsToMany(User, { 
-//    as: "onwer", 
-//    through: {
-//       model : friend_request
-//    }, 
-//    foreignKey: 'userid'
-// });
-// User.belongsToMany(User, { 
-//    as: "friend", 
-//    through: {
-//       model : friend_request
-//    }, 
-//    foreignKey: 'friendid' 
-// });
+User.belongsToMany(User, {
+   as: 'Friends',
+   through: friend_list,
+   foreignKey: 'ownerid',
+   otherKey: 'friendid',
+});
 
 module.exports = {
    User, friend_list, friend_request,
