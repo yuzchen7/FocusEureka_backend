@@ -52,6 +52,7 @@ router.get("/currentUser", async (req, res, next) => {
     }
 })
 
+//create a new friend request and store it in the database
 router.post("/sendRequest", async (req, res, next) => {
     try{
         const currentUser = req.body.requester;
@@ -60,7 +61,7 @@ router.post("/sendRequest", async (req, res, next) => {
         const receiver = await User.findOne({ where:{username:targetUser} });
 
         const reuqest = await friend_request.create({
-            onwerid: requester.id,
+            ownerid: requester.id,
             targetid: receiver.id
         });
         reuqest?
@@ -70,4 +71,5 @@ router.post("/sendRequest", async (req, res, next) => {
         next(error);
     }
 })
+
 module.exports = router;
