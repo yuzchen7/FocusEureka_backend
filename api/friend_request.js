@@ -26,7 +26,7 @@ router.get("/", async (req, res, next) => {
 });
 
 //get all friend requests stored in the database that belong to current user
-router.get("/currentUser", async (req, res, next) => {
+router.get("/sending", async (req, res, next) => {
     try{
         const username = req.query.username;
         const friend_request_data = await User.findAll({ 
@@ -53,7 +53,7 @@ router.get("/currentUser", async (req, res, next) => {
 })
 
 //create a new friend request and store it in the database
-router.post("/sendRequest", async (req, res, next) => {
+router.post("/createRequest", async (req, res, next) => {
     try{
         const currentUser = req.body.requester;
         const targetUser = req.body.receiver;
