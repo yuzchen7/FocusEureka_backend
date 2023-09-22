@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { post } = require("../db/models");
 
 router.get("/", async (req, res, next) => {
+    console.log("get all posts triggered");
     try {
       const allposts = await post.findAll({ order: [['id', 'ASC']] });
   
