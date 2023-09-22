@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, friend_list } = require("../db/models");
+const { User, friend_list, friend_request, group, group_member } = require("../db/models");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -45,11 +45,34 @@ router.delete("/deleteAccount", async (req, res, next) => {
   try {
     const username = req.query.username;
     const deleteUser = await User.findOne({ where: { username: username } });
+    //delete all the data in friend_list table that belong to this user
     const friend_list_data = await friend_list.findAll({ where: {ownerid:deleteUser.id} });
+    friend_list_data.forEach(async (data) => {
+      await data.destroy();
+    });
 
-    if (friend_list_data) {
-      await friend_list_data[0].destroy();
-      res.status(200).send(friend_list_data);
+    //delete all the data in friend_request table that belong to this user
+    const friend_request_data = await friend_request.findAll({ where: {ownerid:deleteUser.id} });
+    friend_request_data.forEach(async (data) => {
+      await data.destroy();
+    });
+
+    //delete all the data in group table that belong to this user
+    // const group_data = await group.findAll({ where: {ownerid:deleteUser.id} });
+    // group_data.forEach(async (data) => {
+    //   await data.destroy();
+    // });
+
+    //delete all the data in group_member table that belong to this user
+    // const group_member_data = await group_member.findAll({ where: {member_id:deleteUser.id} });
+    // group_member_data.forEach(async (data) => {
+    //   await data.destroy();
+    // }); 
+
+
+    if (deleteUser) {
+      deleteUser.destroy();
+      res.status(200).send("Account Deleted Successfully");
     } else {
       res.status(404).send("User Not Found");
     }
