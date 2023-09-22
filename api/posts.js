@@ -4,7 +4,7 @@ const { post } = require("../db/models");
 router.get("/", async (req, res, next) => {
     console.log("get all posts triggered");
     try {
-      const allposts = await post.findAll({ order: [['id', 'ASC']] });
+      const allposts = await post.findAll();
   
       allposts
         ? res.status(200).json(allposts)
