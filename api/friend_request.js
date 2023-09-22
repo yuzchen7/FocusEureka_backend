@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { friend_request, User } = require("../db/models");
 
+//list all friend requests stored in the database
 router.get("/", async (req, res, next) => {
     try {
         const all_friend_request = await User.findAll({ 
@@ -24,6 +25,7 @@ router.get("/", async (req, res, next) => {
     }
 });
 
+//get all friend requests stored in the database that belong to current user
 router.get("/currentUser", async (req, res, next) => {
     try{
         const username = req.query.username;
@@ -50,4 +52,22 @@ router.get("/currentUser", async (req, res, next) => {
     }
 })
 
+router.post("/sendRequest", async (req, res, next) => {
+    try{
+        const currentUser = req.body.requester;
+        const targetUser = req.body.receiver;
+        const requester = await User.findOne({ where:{username:currentUser} });
+        const receiver = await User.findOne({ where:{username:targetUser} });
+
+        const reuqest = await friend_request.create({
+            onwerid: requester.id,
+            targetid: receiver.id
+        });
+        reuqest?
+            res.status(200).json(reuqest)
+            :res.status(404).send("Current User's Friend Request Not Found");
+    }catch(error){
+        next(error);
+    }
+})
 module.exports = router;
