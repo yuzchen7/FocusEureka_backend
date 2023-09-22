@@ -23,4 +23,26 @@ router.get("/", async (req, res, next) => {
     }
 });
 
+router.get("/currentUser", async (req, res, next) => {
+    try{
+        const username = req.query.username;
+        const friend_request = await User.findAll({ 
+            include: [
+                {
+                  model: User,
+                  as: 'Friends_requests',
+                  through: friend_request,
+                  foreignKey: 'onwerid',
+                  otherKey: 'targetid',
+                  attributes: ['id','first_name','last_name','middle_name','username'],
+                },
+              ],
+              order: [['id', 'ASC']],
+              where:{username:username} 
+            });
+    }catch(error){
+        next(error);
+    }
+})
+
 module.exports = router;
