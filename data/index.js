@@ -5,9 +5,10 @@ const GroupSeed = require('./Group');
 const GroupMemberSeed = require('./GroupMember');
 const GroupRequestSeed = require('./GroupRequest');
 const LikeActionSeed = require('./LikeAction');
+const PostSeed = require('./post');
 
 module.exports = {
    UserSeed, FriendListSeed, FriendRequestSeed,
    GroupSeed, GroupMemberSeed, GroupRequestSeed,
-   LikeActionSeed
+   LikeActionSeed, PostSeed
 };

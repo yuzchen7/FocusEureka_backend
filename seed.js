@@ -3,13 +3,13 @@ const db = require("./db");
 const {
   User, friend_list, friend_request,
   group, group_member, group_request,
-  like_action,
+  like_action, post
 } = require("./db/models");
 
 const {
   UserSeed, FriendListSeed, FriendRequestSeed,
   GroupSeed, GroupMemberSeed, GroupRequestSeed,
-  LikeActionSeed,
+  LikeActionSeed, PostSeed
 } = require("./data");
 
 const seed = async () => {
@@ -20,6 +20,7 @@ const seed = async () => {
   await group_member.bulkCreate(GroupMemberSeed);
   await group_request.bulkCreate(GroupRequestSeed);
   await like_action.bulkCreate(LikeActionSeed);
+  await post.bulkCreate(PostSeed);
 };
 
 seed().then(() => process.exit());
