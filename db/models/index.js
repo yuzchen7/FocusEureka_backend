@@ -24,6 +24,13 @@ User.belongsToMany(User, {
    otherKey: 'friendid',
 });
 
+User.belongsToMany(User, {
+   as: 'Friends_requests',
+   through: friend_request,
+   foreignKey: 'ownerid',
+   otherKey: 'targetid',
+});
+
 ImageSet.belongsTo(post);
 
 Comment.hasOne(Comment, {
