@@ -7,6 +7,7 @@ const group_request = require("./GroupRequest");
 const like_action = require("./LikeAction");
 const post = require("./Post");
 const ImageSet = require("./ImageSet");
+const PostLike = require("./PostLike");
 
 /* 
    some relationship are state in the db models js file, which is Enforcing a foreign key 
@@ -27,5 +28,5 @@ ImageSet.belongsTo(post);
 module.exports = {
    User, friend_list, friend_request,
    group, group_member, group_request,
-   like_action, post, ImageSet
+   like_action, post, ImageSet, PostLike
 };
