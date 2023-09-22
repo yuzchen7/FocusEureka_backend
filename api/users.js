@@ -41,13 +41,15 @@ router.put("/updateInfo", async (req, res, next) => {
   }
 });
 
-router.delete("/deleteUser", async (req, res, next) => {
+router.delete("/deleteAccount", async (req, res, next) => {
   try {
     const username = req.query.username;
     const deleteUser = await User.findOne({ where: { username: username } });
-    if (deleteUser) {
-      await deleteUser.destroy();
-      res.status(200).send(deleteUser);
+    const friend_list_data = await friend_list.findAll({ where: {ownerid:deleteUser.id} });
+
+    if (friend_list_data) {
+      await friend_list_data[0].destroy();
+      res.status(200).send(friend_list_data);
     } else {
       res.status(404).send("User Not Found");
     }
