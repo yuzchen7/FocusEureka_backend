@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const { friend_request, User } = require("../db/models");
 
+const user_arrtibutes_filter = ['id','first_name','last_name','middle_name','username'];
+
 //list all friend requests stored in the database
 router.get("/", async (req, res, next) => {
     try {
@@ -12,10 +14,10 @@ router.get("/", async (req, res, next) => {
                   through: friend_request,
                   foreignKey: 'onwerid',
                   otherKey: 'targetid',
-                  attributes: ['id','first_name','last_name','middle_name','username'],
+                  attributes: user_arrtibutes_filter,
                 },
               ],
-              attributes: ['id','first_name','last_name','middle_name','username'],
+              attributes: user_arrtibutes_filter,
               order: [['id', 'ASC']] });
         all_friend_request
             ? res.status(200).json(all_friend_request)
@@ -37,10 +39,10 @@ router.get("/sending", async (req, res, next) => {
                   through: friend_request,
                   foreignKey: 'onwerid',
                   otherKey: 'targetid',
-                  attributes: ['id','first_name','last_name','middle_name','username'],
+                  attributes: user_arrtibutes_filter,
                 },
               ],
-              attributes: ['id','first_name','last_name','middle_name','username'],
+              attributes: user_arrtibutes_filter,
               order: [['id', 'ASC']],
               where:{username:username} 
         });
