@@ -1,4 +1,4 @@
-const UserSeed = [
+const PostSeed = [
     {
         title: "movie nights",
         contents: "out door movie nights in sunset park",
@@ -71,4 +71,4 @@ const UserSeed = [
     },
 ];
 
-module.exports = UserSeed;
+module.exports = PostSeed;
