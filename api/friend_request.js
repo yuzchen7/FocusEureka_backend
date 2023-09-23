@@ -72,4 +72,30 @@ router.post("/createRequest", async (req, res, next) => {
     }
 })
 
+router.post("/acceptRequest", async (req, res, next) => {
+    try{
+        const currentUser = req.body.accepter;
+        const targetUser = req.body.receiver;
+        //the user who accepts the friend request
+        const accepter = await User.findOne({ where:{username:currentUser} });
+        //the user who sends the friend request
+        const receiver = await User.findOne({ where:{username:targetUser} });
+
+        await FriendList.create({
+            ownerid: accepter.id,
+            friendid: receiver.id
+        });
+        await FriendList.create({
+            ownerid: receiver.id,
+            friendid: accepter.id
+        });
+
+        const deleteRequest = await friend_request.destroy({where:{ownerid:targetUser.id,targetid:accepter.id}});
+        deleteRequest?
+            res.status(200).json(reuqest)
+            :res.status(404).send("Current User's Friend Request Not Found");
+    }catch(error){
+        next(error);
+    }
+})
 module.exports = router;
