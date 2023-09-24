@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { friend_request, User } = require("../db/models");
+const { friend_request, User,friend_list } = require("../db/models");
 
 const user_arrtibutes_filter = ['id','first_name','last_name','middle_name','username'];
 
@@ -83,18 +83,18 @@ router.post("/acceptRequest", async (req, res, next) => {
         //the user who sends the friend request
         const receiver = await User.findOne({ where:{username:targetUser} });
 
-        await FriendList.create({
+        await friend_list.create({
             ownerid: accepter.id,
             friendid: receiver.id
         });
-        await FriendList.create({
+        await friend_list.create({
             ownerid: receiver.id,
             friendid: accepter.id
         });
 
-        const deleteRequest = await friend_request.destroy({where:{ownerid:targetUser.id,targetid:accepter.id}});
+        const deleteRequest = await friend_request.destroy({where:{ownerid:receiver.id,targetid:accepter.id}});
         deleteRequest?
-            res.status(200).json(reuqest)
+            res.status(200).json(deleteRequest)
             :res.status(404).send("Current User's Friend Request Not Found");
     }catch(error){
         next(error);
