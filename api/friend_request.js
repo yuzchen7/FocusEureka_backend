@@ -12,9 +12,8 @@ router.get("/", async (req, res, next) => {
                   model: User,
                   as: 'Friends_requests',
                   through: friend_request,
-                  foreignKey: 'onwerid',
-                  otherKey: 'targetid',
                   attributes: user_arrtibutes_filter,
+                  right: true
                 },
               ],
               attributes: user_arrtibutes_filter,
@@ -100,4 +99,30 @@ router.post("/acceptRequest", async (req, res, next) => {
         next(error);
     }
 })
+
+// router.get("/receiving", async (req, res, next) => {
+//     try{
+//         const username = req.query.username;
+//         const friend_request_data = await User.findAll({ 
+//             include: [
+//                 {
+//                   model: User,
+//                   as: 'Friends_requests',
+//                   through: friend_request,
+//                   attributes: user_arrtibutes_filter,
+//                   right: true 
+//                 },
+//               ],
+//               attributes: user_arrtibutes_filter,
+//               order: [['id', 'ASC']],
+//             //   where:{username:username} 
+//         });
+//         friend_request_data?
+//             res.status(200).json(friend_request_data)
+//             :res.status(404).send("Current User's Friend Request Not Found");
+//     }catch(error){
+//         next(error);
+//     }
+// })
+
 module.exports = router;
