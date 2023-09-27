@@ -4,20 +4,10 @@ const db = require("../db");
 const User = require("./user");
 
 const friend_request = db.define("friend_request", {
-   id : {
-      type : DataTypes.INTEGER,
-      allowNull : false,
-      unique : true,
-      primaryKey : true,
-      autoIncrement : true,
-      validate : {
-         isInt : true,
-         notEmpty : true
-      }
-   },
-
    ownerid : {
       type : DataTypes.INTEGER,
+      unique : true,
+      primaryKey : true,
       allowNull : false,
       validate : {
          isInt : true,
@@ -31,6 +21,8 @@ const friend_request = db.define("friend_request", {
 
    targetid : {
       type : DataTypes.INTEGER,
+      unique : true,
+      primaryKey : true,
       allowNull : false,
       validate : {
          isInt : true,
