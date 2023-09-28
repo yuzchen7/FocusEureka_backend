@@ -58,4 +58,19 @@ router.post("/createPost", async (req, res, next) => {
   }
 })
 
+router.put("/updatePost", async (req, res, next) => {
+  try{
+    const updateInfo = req.body;
+    const foundPost = await post.findByPk(updateInfo.id);
+    if(foundPost){
+      await foundPost.update(updateInfo);
+      res.status(200).json(foundPost);
+    }else{
+      res.status(404).send("Posts Not Found");
+    }
+  }catch(error){
+    next(error);
+  }
+});
+
 module.exports = router;
