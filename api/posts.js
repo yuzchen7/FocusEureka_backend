@@ -30,4 +30,16 @@ router.get("/currentUser", async (req, res, next) => {
   }
 })
 
+router.post("/createPost", async (req, res, next) => {
+  try{
+    const postData = req.body;
+    const newPost = await post.create(postData);
+    newPost
+    ?res.status(200).json(postData)
+    :res.status(404).send("New Posts Not Found");
+  }catch(error){
+    next(error);
+  }
+})
+
 module.exports = router;
