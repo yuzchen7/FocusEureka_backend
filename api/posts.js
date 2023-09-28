@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { post } = require("../db/models");
+const { post,User } = require("../db/models");
 
 router.get("/", async (req, res, next) => {
     console.log("get all posts triggered");
@@ -13,5 +13,21 @@ router.get("/", async (req, res, next) => {
       next(error);
     }
 });
+
+router.get("/currentUser", async (req, res, next) => {
+    console.log("get current user's posts triggered");
+  try{
+
+    const username = req.query.username;
+    const user = await User.findOne({where :{username:username}});
+    const currentUserPosts = await post.findAll({where :{ownerid:user.id}});
+
+    currentUserPosts
+    ? res.status(200).json(currentUserPosts)
+    : res.status(404).send("Posts Not Found");
+  }catch(error){
+    next(error);
+  }
+})
 
 module.exports = router;
