@@ -46,7 +46,7 @@ router.get("/currentUser", async (req, res, next) => {
 //   "ownerid":"1",
 //   "event":"true"
 // }
-router.post("/createPost", async (req, res, next) => {
+router.post("/create", async (req, res, next) => {
   try{
     const postData = req.body;
     const newPost = await post.create(postData);
