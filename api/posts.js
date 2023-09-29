@@ -1,11 +1,11 @@
 const router = require('express').Router();
-const { post,User } = require("../db/models");
+const { post,User,ImageSet} = require("../db/models");
 
 //retrieve all posts stored in the database
 router.get("/", async (req, res, next) => {
     console.log("get all posts triggered");
     try {
-      const allposts = await post.findAll();
+      const allposts = await post.findAll({include: ImageSet});
   
       allposts
         ? res.status(200).json(allposts)
