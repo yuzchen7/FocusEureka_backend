@@ -50,6 +50,7 @@ router.post("/createPost", async (req, res, next) => {
   try{
     const postData = req.body;
     const newPost = await post.create(postData);
+    await ImageSet.create({post_id:newPost.id,urls:postData.urls})
     newPost
     ?res.status(200).json(postData)
     :res.status(404).send("New Posts Not Found");
