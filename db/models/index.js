@@ -31,7 +31,7 @@ User.belongsToMany(User, {
    otherKey: 'targetid',
 });
 
-ImageSet.belongsTo(post);
+ImageSet.belongsTo(post,{ foreignKey: 'post_id' });
 
 Comment.hasOne(Comment, {
    as : "reply_comment",
