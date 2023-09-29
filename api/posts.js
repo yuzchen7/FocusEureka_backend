@@ -59,11 +59,13 @@ router.post("/createPost", async (req, res, next) => {
   }
 })
 
-router.put("/updatePost", async (req, res, next) => {
+router.put("/updateInfo", async (req, res, next) => {
   try{
     const updateInfo = req.body;
     const foundPost = await post.findByPk(updateInfo.id);
+    const foundImageSet = await ImageSet.findByPk(foundPost.id)
     if(foundPost){
+      await foundImageSet.update({urls:updateInfo.urls})
       await foundPost.update(updateInfo);
       res.status(200).json(foundPost);
     }else{
