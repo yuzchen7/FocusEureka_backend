@@ -9,7 +9,7 @@ const {
 const {
   UserSeed, FriendListSeed, FriendRequestSeed,
   GroupSeed, GroupMemberSeed, GroupRequestSeed,
-  LikeActionSeed, PostSeed, PostLikeSeed
+  LikeActionSeed, PostSeed, PostLikeSeed, ImageSetSeed
 } = require("./data");
 
 const seed = async () => {
@@ -22,6 +22,7 @@ const seed = async () => {
   await like_action.bulkCreate(LikeActionSeed);
   await post.bulkCreate(PostSeed);
   await PostLike.bulkCreate(PostLikeSeed);
+  await ImageSet.bulkCreate(ImageSetSeed);
 };
 
 seed().then(() => process.exit());
