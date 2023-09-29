@@ -22,7 +22,7 @@ router.get("/currentUser", async (req, res, next) => {
 
     const username = req.query.username;
     const user = await User.findOne({where :{username:username}});
-    const currentUserPosts = await post.findAll({where :{ownerid:user.id}});
+    const currentUserPosts = await post.findAll({include: ImageSet,where :{ownerid:user.id}});
 
     currentUserPosts
     ? res.status(200).json(currentUserPosts)
