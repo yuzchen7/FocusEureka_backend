@@ -40,7 +40,10 @@ Comment.hasMany(Comment, {
    allowNull: true,
 });
 
-Comment.hasOne(post,{ foreignKey: 'post_id' });
+post.belongsTo(User,{foreignKey:'ownerid'});
+User.hasMany(post,{foreignKey:'ownerid'});
+
+Comment.belongsTo(post,{ foreignKey: 'post_id' });
 post.hasMany(Comment,{ foreignKey: 'post_id' });
 
 module.exports = {
