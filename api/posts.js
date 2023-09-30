@@ -15,6 +15,17 @@ router.get("/", async (req, res, next) => {
     }
 });
 
+router.get("/singleView", async (req, res, next) => {
+  const postId = req.query.postId;
+  try{
+    const postInfo = await post.findOne({include: ImageSet, where: {id: postId}});
+    postInfo
+      ? res.status(200).json(postInfo)
+      : res.status(404).json("Post Not Found")
+  }catch (error) {
+  }
+})
+
 //retrieve all posts of current user
 router.get("/currentUser", async (req, res, next) => {
     console.log("get current user's posts triggered");
