@@ -40,6 +40,9 @@ Comment.hasOne(Comment, {
    allowNull: true,
 });
 
+Comment.hasOne(post,{ foreignKey: 'post_id' });
+post.hasMany(Comment,{ foreignKey: 'post_id' });
+
 module.exports = {
    User, friend_list, friend_request,
    group, group_member, group_request,
