@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { post,User,ImageSet} = require("../db/models");
+const { post,User,ImageSet,Comment} = require("../db/models");
 
 const user_arrtibutes_filter = ['id','first_name','last_name','middle_name','username'];
 //retrieve all posts stored in the database
@@ -19,7 +19,18 @@ router.get("/", async (req, res, next) => {
 router.get("/singleView", async (req, res, next) => {
   const postId = req.query.postId;
   try{
-    const postInfo = await post.findOne({include: ImageSet, where: {id: postId}});
+    const postInfo = await post.findOne({include: [
+      {model:ImageSet}, 
+      {model:User,attributes:user_arrtibutes_filter},
+      {model:Comment,
+      include:[
+      {
+        model: Comment,
+        as: 'reply_comment'
+      }],
+      // where:{reply_comment_id:{[Op.is]:null}}
+      where:{reply_comment_id:null}
+    }], where: {id: postId}});
     postInfo
       ? res.status(200).json(postInfo)
       : res.status(404).json("Post Not Found")
