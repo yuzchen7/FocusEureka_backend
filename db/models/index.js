@@ -31,13 +31,20 @@ User.belongsToMany(User, {
    otherKey: 'targetid',
 });
 
-ImageSet.belongsTo(post);
+ImageSet.belongsTo(post,{ foreignKey: 'post_id' });
+post.hasOne(ImageSet,{ foreignKey: 'post_id' });
 
-Comment.hasOne(Comment, {
+Comment.hasMany(Comment, {
    as : "reply_comment",
    foreignKey: "reply_comment_id",
    allowNull: true,
 });
+
+post.belongsTo(User,{foreignKey:'ownerid'});
+User.hasMany(post,{foreignKey:'ownerid'});
+
+Comment.belongsTo(post,{ foreignKey: 'post_id' });
+post.hasMany(Comment,{ foreignKey: 'post_id' });
 
 module.exports = {
    User, friend_list, friend_request,
