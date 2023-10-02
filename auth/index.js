@@ -35,7 +35,15 @@ router.post("/signup", async (req, res, next) => {
         if (!username || !password) {
             return res.status(400).send("Required fields missing");
         }
+
+        // new code to be added on, but since i add the unique limitation
+        // in the db model, the following 2line of code are become 
+        // unnecessary
+        const check = await User.findOne({ where: { username: username}});
+        if (check !== null) {throw new SequelizeUniqueConstraintError}
+
         const user = await User.create(req.body);
+
         // Passport js method on request
         req.login(user, (err) =>
             err ? next(err) : res.status(200).json({ username: user.username, id: user.id })

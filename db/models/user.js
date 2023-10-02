@@ -41,6 +41,7 @@ User.init(
 
       username: {
          type: DataTypes.STRING,
+         unique: true,
          require: true
       },
 
