@@ -7,7 +7,8 @@ const CommentSeed = [
     {
         onwer_id : 2,
         post_id: 1,
-        contents: "cant wait to see the event..."
+        contents: "cant wait to see the event...",
+        reply_comment_id:1
     },
     {
         onwer_id : 2,
