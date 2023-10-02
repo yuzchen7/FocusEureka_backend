@@ -26,6 +26,7 @@ const PostLike = db.define('post_like', {
 
    action_id : {
       type : DataTypes.INTEGER,
+      require : true,
       references : {
          model : like_action,
          key : 'action_id'
