@@ -1,12 +1,14 @@
 const router = require('express').Router();
-const { post,User,ImageSet,Comment} = require("../db/models");
+const { post,User,ImageSet,Comment,PostLike} = require("../db/models");
 
 const user_arrtibutes_filter = ['id','first_name','last_name','middle_name','username'];
 //retrieve all posts stored in the database
 router.get("/", async (req, res, next) => {
     console.log("get all posts triggered");
     try {
-      const allposts = await post.findAll({include: [{model:ImageSet}, {model:User,attributes:user_arrtibutes_filter}]});
+      const allposts = await post.findAll({include: [{model:ImageSet},
+        {model:User,as:'onwer',attributes:user_arrtibutes_filter},
+        {model:PostLike,include:[{model:User,attributes:user_arrtibutes_filter}]}]});
   
       allposts
         ? res.status(200).json(allposts)
