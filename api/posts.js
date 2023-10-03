@@ -8,7 +8,9 @@ router.get("/", async (req, res, next) => {
     try {
       const allposts = await post.findAll({include: [{model:ImageSet},
         {model:User,as:'owner',attributes:user_arrtibutes_filter},
-        {model:PostLike,include:[{model:User,attributes:user_arrtibutes_filter}]}]});
+        {model:PostLike,include:[{model:User,attributes:user_arrtibutes_filter}]}],
+        order: [['id', 'DESC']]
+      });
   
       allposts
         ? res.status(200).json(allposts)
