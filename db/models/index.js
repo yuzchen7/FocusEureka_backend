@@ -50,7 +50,7 @@ post.hasMany(Comment,{ foreignKey: 'post_id' });
 PostLike.hasMany(like_action,{foreignKey : 'action_id'});
 like_action.belongsTo(PostLike,{foreignKey : 'action_id'});
 
-post.hasOne(PostLike, { foreignKey: 'post_id'});
+post.hasMany(PostLike, { foreignKey: 'post_id'});
 PostLike.belongsTo(post, { foreignKey : 'post_id' });
 
 User.hasMany(PostLike, {foreignKey : 'user_id'});
