@@ -106,7 +106,11 @@ router.put("/updateInfo", async (req, res, next) => {
 router.get("/userPosts", async (req, res, next) => {
   try{
     const username = req.query.username;
-    const posts = await User.findAll({include:[{model:post, include:ImageSet}], where:{username:username}})
+    const posts = await User.findAll({include:[
+      {model:post, include:[{model:ImageSet},
+          {model:PostLike,include:[{model:User,attributes:user_arrtibutes_filter}]}]}
+    ],
+       where:{username:username}})
     posts
       ?res.status(200).json(posts)
       :res.status(404).send("Posts Not Found");
