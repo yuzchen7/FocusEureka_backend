@@ -40,7 +40,7 @@ Comment.hasMany(Comment, {
    allowNull: true,
 });
 
-post.belongsTo(User,{as:'onwer',foreignKey:'ownerid'});
+post.belongsTo(User,{as:'owner',foreignKey:'ownerid'});
 User.hasMany(post,{foreignKey:'ownerid'});
 
 Comment.belongsTo(post,{ foreignKey: 'post_id' });
