@@ -119,7 +119,8 @@ router.get("/currentUser", async (req, res, next) => {
           { model: PostLike, include: [{ model: User, attributes: user_arrtibutes_filter }] }]
         }
       ],
-      where: { username: username }
+      where: { username: username },
+      order:[[post,'id','DESC']]
     })
     posts
       ? res.status(200).json(posts)
