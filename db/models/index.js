@@ -9,7 +9,7 @@ const post = require("./Post");
 const ImageSet = require("./ImageSet");
 const PostLike = require("./PostLike");
 const Comment = require("./Comment");
-const LikeAction = require("./LikeAction");
+const Weekdays = require("./Weekdays");
 
 /* 
    some relationship are state in the db models js file, which is Enforcing a foreign key 
@@ -47,8 +47,8 @@ User.hasMany(post,{foreignKey:'ownerid'});
 Comment.belongsTo(post,{ foreignKey: 'post_id' });
 post.hasMany(Comment,{ foreignKey: 'post_id' });
 
-PostLike.hasMany(LikeAction,{foreignKey : 'action_id'});
-LikeAction.belongsTo(PostLike,{foreignKey : 'action_id'});
+PostLike.hasMany(like_action,{foreignKey : 'action_id'});
+like_action.belongsTo(PostLike,{foreignKey : 'action_id'});
 
 post.hasOne(PostLike, { foreignKey: 'post_id'});
 PostLike.belongsTo(post, { foreignKey : 'post_id' });
@@ -60,5 +60,5 @@ module.exports = {
    User, friend_list, friend_request,
    group, group_member, group_request,
    like_action, post, ImageSet, PostLike,
-   Comment, LikeAction
+   Comment, Weekdays
 };
