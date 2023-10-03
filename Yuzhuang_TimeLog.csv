@@ -1,0 +1,2 @@
+Date,Time,Description,Duration
+10/2/23,3:00pm ~ 6:00pm,re-designed the post like table model; implement post_like and its relationship between user and post model; help Kaifeng solve the association error occur in the post endpoint.,3 hours
