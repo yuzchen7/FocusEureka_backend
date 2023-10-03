@@ -24,6 +24,7 @@ router.get("/singleView", async (req, res, next) => {
     const postInfo = await post.findOne({include: [
       {model:ImageSet}, 
       {model:User,as:'owner',attributes:user_arrtibutes_filter},
+      {model:PostLike,include:[{model:User,attributes:user_arrtibutes_filter}]},
       {model:Comment,
       include:[
       {
