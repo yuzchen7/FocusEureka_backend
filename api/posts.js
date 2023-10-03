@@ -42,7 +42,7 @@ router.get("/singleView", async (req, res, next) => {
 })
 
 //retrieve all posts of current user
-router.get("/currentUser", async (req, res, next) => {
+router.get("/user", async (req, res, next) => {
     console.log("get current user's posts triggered");
   try{
 
@@ -103,7 +103,7 @@ router.put("/updateInfo", async (req, res, next) => {
 });
 
 //another endpoint for user to retrieve all of their posts
-router.get("/userPosts", async (req, res, next) => {
+router.get("/currentUser", async (req, res, next) => {
   try{
     const username = req.query.username;
     const posts = await User.findAll({include:[
