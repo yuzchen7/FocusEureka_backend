@@ -7,7 +7,7 @@ router.get("/", async (req, res, next) => {
     console.log("get all posts triggered");
     try {
       const allposts = await post.findAll({include: [{model:ImageSet},
-        {model:User,as:'onwer',attributes:user_arrtibutes_filter},
+        {model:User,as:'owner',attributes:user_arrtibutes_filter},
         {model:PostLike,include:[{model:User,attributes:user_arrtibutes_filter}]}]});
   
       allposts
@@ -23,7 +23,7 @@ router.get("/singleView", async (req, res, next) => {
   try{
     const postInfo = await post.findOne({include: [
       {model:ImageSet}, 
-      {model:User,attributes:user_arrtibutes_filter},
+      {model:User,as:'owner',attributes:user_arrtibutes_filter},
       {model:Comment,
       include:[
       {
