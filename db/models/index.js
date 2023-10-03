@@ -4,7 +4,6 @@ const friend_request = require("./FriendRequest");
 const group = require("./Group");
 const group_member = require("./GroupMember");
 const group_request = require("./GroupRequest");
-const like_action = require("./LikeAction");
 const post = require("./Post");
 const ImageSet = require("./ImageSet");
 const PostLike = require("./PostLike");
@@ -47,9 +46,6 @@ User.hasMany(post,{foreignKey:'ownerid'});
 Comment.belongsTo(post,{ foreignKey: 'post_id' });
 post.hasMany(Comment,{ foreignKey: 'post_id' });
 
-PostLike.hasMany(like_action,{foreignKey : 'action_id'});
-like_action.belongsTo(PostLike,{foreignKey : 'action_id'});
-
 post.hasMany(PostLike, { foreignKey: 'post_id'});
 PostLike.belongsTo(post, { foreignKey : 'post_id' });
 
@@ -59,6 +55,6 @@ PostLike.belongsTo(User, {foreignKey : 'user_id'});
 module.exports = {
    User, friend_list, friend_request,
    group, group_member, group_request,
-   like_action, post, ImageSet, PostLike,
-   Comment, Weekdays
+   post, ImageSet, PostLike, Comment, 
+   Weekdays
 };

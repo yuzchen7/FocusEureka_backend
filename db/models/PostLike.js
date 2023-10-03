@@ -3,7 +3,6 @@ const db = require('../db');
 
 const user = require("./user");
 const post = require("./Post");
-const like_action = require("./LikeAction");
 
 const PostLike = db.define('post_like', {
    user_id : {
@@ -22,16 +21,7 @@ const PostLike = db.define('post_like', {
          model : post,
          key : 'id'
       }
-   },
-
-   action_id : {
-      type : DataTypes.INTEGER,
-      require : true,
-      references : {
-         model : like_action,
-         key : 'action_id'
-      }
-   },
+   }
 
 }, {
    timestamps : false
