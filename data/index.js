@@ -9,10 +9,11 @@ const PostSeed = require('./post');
 const PostLikeSeed = require('./PostLike');
 const ImageSetSeed = require('./ImageSet');
 const CommentSeed = require('./Comment');
+const WeekdaysSeed = require('./Weekdays');
 
 module.exports = {
    UserSeed, FriendListSeed, FriendRequestSeed,
    GroupSeed, GroupMemberSeed, GroupRequestSeed,
    LikeActionSeed, PostSeed, PostLikeSeed, ImageSetSeed,
-   CommentSeed
+   CommentSeed, WeekdaysSeed
 };
