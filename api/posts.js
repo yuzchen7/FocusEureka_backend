@@ -112,7 +112,8 @@ router.get("/currentUser", async (req, res, next) => {
       {model:post, include:[{model:ImageSet},
           {model:PostLike,include:[{model:User,attributes:user_arrtibutes_filter}]}]}
     ],
-       where:{username:username}})
+       where:{username:username},
+       order: [['id', 'DESC']]})
     posts
       ?res.status(200).json(posts)
       :res.status(404).send("Posts Not Found");
