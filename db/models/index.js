@@ -8,7 +8,7 @@ const post = require("./Post");
 const ImageSet = require("./ImageSet");
 const PostLike = require("./PostLike");
 const Comment = require("./Comment");
-const Weekdays = require("./Weekdays");
+// const Weekdays = require("./Weekdays");
 
 /* 
    some relationship are state in the db models js file, which is Enforcing a foreign key 
@@ -56,5 +56,5 @@ module.exports = {
    User, friend_list, friend_request,
    group, group_member, group_request,
    post, ImageSet, PostLike, Comment, 
-   Weekdays
+   // Weekdays
 };

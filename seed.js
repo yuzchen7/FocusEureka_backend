@@ -4,14 +4,15 @@ const {
   User, friend_list, friend_request,
   group, group_member, group_request,
   post, ImageSet, PostLike, Comment, 
-  Weekdays
+  // Weekdays
 } = require("./db/models");
 
 const {
   UserSeed, FriendListSeed, FriendRequestSeed,
-   GroupSeed, GroupMemberSeed, GroupRequestSeed,
-   PostSeed, PostLikeSeed, ImageSetSeed,
-   CommentSeed, WeekdaysSeed
+  GroupSeed, GroupMemberSeed, GroupRequestSeed,
+  PostSeed, PostLikeSeed, ImageSetSeed,
+  CommentSeed, 
+  // WeekdaysSeed
 } = require("./data");
 
 const seed = async () => {
@@ -25,7 +26,7 @@ const seed = async () => {
   await PostLike.bulkCreate(PostLikeSeed);
   await ImageSet.bulkCreate(ImageSetSeed);
   await Comment.bulkCreate(CommentSeed);
-  await Weekdays.bulkCreate(WeekdaysSeed);
+  // await Weekdays.bulkCreate(WeekdaysSeed);
 };
 
 seed().then(() => process.exit());
