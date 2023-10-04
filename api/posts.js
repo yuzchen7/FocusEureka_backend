@@ -36,6 +36,7 @@ router.get("/singleView", async (req, res, next) => {
               model: Comment,
               as: 'reply_comment'
             }],
+            required: false,
           // where:{reply_comment_id:{[Op.is]:null}}
           where: { reply_comment_id: null }
         }], where: { id: postId }
