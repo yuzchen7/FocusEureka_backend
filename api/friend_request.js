@@ -57,15 +57,20 @@ router.get("/sending", async (req, res, next) => {
 //create a new friend request and store it in the database
 router.post("/createRequest", async (req, res, next) => {
     try{
-        const currentUser = req.body.requester;
-        const targetUser = req.body.receiver;
-        const requester = await User.findOne({ where:{username:currentUser} });
-        const receiver = await User.findOne({ where:{username:targetUser} });
+        const currentUser_id = req.body.requester;
+        const targetUser_id = req.body.receiver;
+        
+        const requester = await User.findOne({ where:{id:currentUser_id} });
+        if (requester == null) throw new Error;
+        
+        const receiver = await User.findOne({ where:{id:targetUser_id} });
+        if (receiver == null) throw new Error;
 
         const reuqest = await friend_request.create({
-            ownerid: requester.id,
-            targetid: receiver.id
+            ownerid: currentUser_id,
+            targetid: targetUser_id.id
         });
+
         reuqest?
             res.status(200).json(reuqest)
             :res.status(404).send("Current User's Friend Request Not Found");
@@ -90,7 +95,7 @@ router.post("/acceptRequest", async (req, res, next) => {
             friendid: targetUser_id
         });
 
-        const deleteRequest = await friend_request.destroy({where:{ownerid:receiver.id,targetid:currentUser_id}});
+        const deleteRequest = await friend_request.destroy({where:{ownerid:targetUser_id,targetid:currentUser_id}});
         deleteRequest?
             res.status(200).json(deleteRequest)
             :res.status(404).send("Current User's Friend Request Not Found");
