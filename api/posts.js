@@ -52,9 +52,8 @@ router.get("/user", async (req, res, next) => {
   console.log("get current user's posts triggered");
   try {
 
-    const username = req.query.username;
-    const user = await User.findOne({ where: { username: username } });
-    const currentUserPosts = await post.findAll({ include: ImageSet, where: { ownerid: user.id } });
+    const userId = req.query.userId;
+    const currentUserPosts = await post.findAll({ include: ImageSet, where: { ownerid: userId } });
 
     currentUserPosts
       ? res.status(200).json(currentUserPosts)
