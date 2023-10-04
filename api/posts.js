@@ -36,6 +36,7 @@ router.get("/singleView", async (req, res, next) => {
               model: Comment,
               as: 'reply_comment'
             }],
+            required: false,
           // where:{reply_comment_id:{[Op.is]:null}}
           where: { reply_comment_id: null }
         }], where: { id: postId }
@@ -52,9 +53,8 @@ router.get("/user", async (req, res, next) => {
   console.log("get current user's posts triggered");
   try {
 
-    const username = req.query.username;
-    const user = await User.findOne({ where: { username: username } });
-    const currentUserPosts = await post.findAll({ include: ImageSet, where: { ownerid: user.id } });
+    const userId = req.query.userId;
+    const currentUserPosts = await post.findAll({ include: ImageSet, where: { ownerid: userId } });
 
     currentUserPosts
       ? res.status(200).json(currentUserPosts)
@@ -111,7 +111,7 @@ router.put("/updateInfo", async (req, res, next) => {
 //another endpoint for user to retrieve all of their posts
 router.get("/currentUser", async (req, res, next) => {
   try {
-    const username = req.query.username;
+    const userId = req.query.userId;
     const posts = await User.findAll({
       include: [
         {
@@ -119,7 +119,7 @@ router.get("/currentUser", async (req, res, next) => {
           { model: PostLike, include: [{ model: User, attributes: user_arrtibutes_filter }] }]
         }
       ],
-      where: { username: username },
+      where: { id: userId },
       order:[[post,'id','DESC']]
     })
     posts
