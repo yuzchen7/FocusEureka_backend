@@ -20,7 +20,19 @@ router.post("/write", async (req, res) => {
         ?res.status(200).json(newComment)
         :res.status(404).json("new comment not found");
     }catch(error){
+        next(error);
+    }
+})
 
+router.post("/reply", async (req, res) => {
+    try{
+        const replyData = req.body;
+        const reply_to_comment = await Comment.create(replyData);
+        reply_to_comment
+        ?res.status(200).json(reply_to_comment)
+        :res.status(404).json("reply under comment is not found");
+    }catch(error){
+        next(error);
     }
 })
 module.exports = router
