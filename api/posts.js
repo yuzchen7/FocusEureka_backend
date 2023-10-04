@@ -111,7 +111,7 @@ router.put("/updateInfo", async (req, res, next) => {
 //another endpoint for user to retrieve all of their posts
 router.get("/currentUser", async (req, res, next) => {
   try {
-    const username = req.query.username;
+    const userId = req.query.userId;
     const posts = await User.findAll({
       include: [
         {
@@ -119,7 +119,7 @@ router.get("/currentUser", async (req, res, next) => {
           { model: PostLike, include: [{ model: User, attributes: user_arrtibutes_filter }] }]
         }
       ],
-      where: { username: username },
+      where: { id: userId },
       order:[[post,'id','DESC']]
     })
     posts
