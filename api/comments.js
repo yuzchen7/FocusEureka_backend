@@ -11,4 +11,16 @@ router.get("/", async (req,res) => {
         next(error);
     }
 })
+
+router.post("/write", async (req, res) => {
+    try{
+        const commentData = req.body;
+        const newComment = await Comment.create(commentData);
+        newComment
+        ?res.status(200).json(newComment)
+        :res.status(404).json("new comment not found");
+    }catch(error){
+
+    }
+})
 module.exports = router
