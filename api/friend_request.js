@@ -88,7 +88,7 @@ router.post("/createRequest", async (req, res, next) => {
                 ],
             },
         }).then((results) => {
-            if (!results) {
+            if (results) {
                 res.status(400);
                 throw new Error("friend already exists");
             }
