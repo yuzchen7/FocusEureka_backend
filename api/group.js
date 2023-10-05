@@ -36,7 +36,40 @@ router.post('/groupmember', async (req, res, next) => {
 });
 
 router.post('/grouprequest', async (req, res, next) => {
+   try {
+      const request_id = req.body.requestid;
+      const group_id = req.body.groupid;
+      console.log(request_id);
+      
+      const groupinfo = await group.findOne({
+         where : {
+            id : group_id
+         }
+      }).then(async result => {
+         if (!result) {
+            res.status(404);
+            throw new Error("No User or onwer founded");
+         }
 
+         const onwer_id = result.ownerid;
+         console.log(onwer_id);
+
+         const request_res = await group_request.create({
+            onwer_id : onwer_id, 
+            request_id : request_id, 
+            group_id : group_id
+         });
+
+         request_res ?
+            res.status(200).json({request_res, message: "request successfully created"})
+            : res.status(404).send({message: 'group request failed'});
+      });
+
+   } catch (err) {
+      console.error(err);
+      res.status(400).send({message: err.message});
+      next(err);
+   }
 });
 
 router.post('/acceptrequest', async (req, res, next) => {
