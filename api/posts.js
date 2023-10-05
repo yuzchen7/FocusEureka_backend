@@ -45,6 +45,7 @@ router.get("/singleView", async (req, res, next) => {
       ? res.status(200).json(postInfo)
       : res.status(404).json("Post Not Found")
   } catch (error) {
+    next(error)
   }
 })
 
