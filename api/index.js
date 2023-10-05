@@ -5,6 +5,7 @@ router.use('/users', require('./users'));
 router.use('/posts', require('./posts'));
 router.use('/friend_request', require('./friend_request'));
 router.use('/comments', require('./comments'));
+router.use('/weekdays', require('./weekdays'));
 
 router.use((req, res, next) => {
     const error = new Error("404 Not Found");
