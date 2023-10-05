@@ -29,4 +29,15 @@ router.get('/currentUser', async (req, res) => {
         next(error);
     }
 })
+
+router.post('/create', async (req, res) => {
+    try{
+        const user_schedule = await Schedule.create(req.body);
+        user_schedule
+        ?res.status(200).json(user_schedule)
+        :res.status(404).json("failed to create user's schedule");
+    }catch(error){
+        next(error)
+    }
+})
 module.exports = router;
