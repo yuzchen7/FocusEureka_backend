@@ -31,7 +31,7 @@ router.get("/", async (req, res, next) => {
 //get all friend requests stored in the database that belong to current user
 router.get("/sending", async (req, res, next) => {
     try{
-        const username = req.query.username;
+        const user_id = req.query.userid;
         const friend_request_data = await User.findAll({ 
             include: [
                 {
@@ -45,7 +45,7 @@ router.get("/sending", async (req, res, next) => {
               ],
               attributes: user_arrtibutes_filter,
               order: [['id', 'ASC']],
-              where:{username:username} 
+              where:{id:user_id} 
         });
         friend_request_data?
             res.status(200).json(friend_request_data)
