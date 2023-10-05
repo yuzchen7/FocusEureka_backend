@@ -59,7 +59,7 @@ router.get("/sending", async (req, res, next) => {
 router.post("/createRequest", async (req, res, next) => {
     try{
         const currentUser_id = req.body.requester;
-        const targetUser_id = req.body.receiver;
+        const targetUser_id = req.body.accepter;
         
         const requester = await User.findOne({ where:{id:currentUser_id} });
         if (!requester) {
@@ -67,8 +67,8 @@ router.post("/createRequest", async (req, res, next) => {
             throw new Error("No such user found")
         };
         
-        const receiver = await User.findOne({ where:{id:targetUser_id} });
-        if (!receiver) {
+        const accepter = await User.findOne({ where:{id:targetUser_id} });
+        if (!accepter) {
             res.status(404);
             throw new Error("No such user found")
         };
