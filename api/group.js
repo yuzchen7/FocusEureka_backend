@@ -35,15 +35,43 @@ router.post('/groupmember', async (req, res, next) => {
 
 });
 
+// onwer -> user
 router.post('/groupinvite', async (req, res, next) => {
-   
+   try {
+      const requester_id = req.body.requestid; // group onwer
+      const acceptor_id = req.body.acceptid; // user
+      const group_id = req.body.groupid;
+
+      const userinfo = await User.findOne({
+         where : {
+            id : acceptor_id
+         }
+      }).then (async result => {
+         if (!result) {
+            throw new Error("no such user founded");
+         }
+
+         const create_result = await group_request.create({
+            requester_id, acceptor_id, group_id
+         });
+
+         create_result ?
+            res.status(200).json({create_result, message: "invited successfully"})
+            : res.status(400).send({message: "invited failed"});
+      });
+
+   } catch (err) {
+      console.error(err);
+      res.status(400).send({message: err.message});
+      next(err);
+   }
 });
 
+// user -> onwer
 router.post('/grouprequest', async (req, res, next) => {
    try {
-      const request_id = req.body.requestid;
-      const group_id = req.body.groupid;
-      console.log(request_id);
+      const requester_id = req.body.requestid; // user
+      const group_id = req.body.groupid; // onwer group
       
       const groupinfo = await group.findOne({
          where : {
@@ -55,13 +83,10 @@ router.post('/grouprequest', async (req, res, next) => {
             throw new Error("No User or onwer founded");
          }
 
-         const onwer_id = result.ownerid;
-         console.log(onwer_id);
+         const acceptor_id = result.ownerid;
 
          const request_res = await group_request.create({
-            onwer_id : onwer_id, 
-            request_id : request_id, 
-            group_id : group_id
+            requester_id, acceptor_id, group_id
          });
 
          request_res ?
