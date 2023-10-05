@@ -35,6 +35,10 @@ router.post('/groupmember', async (req, res, next) => {
 
 });
 
+router.post('/groupinvite', async (req, res, next) => {
+   
+});
+
 router.post('/grouprequest', async (req, res, next) => {
    try {
       const request_id = req.body.requestid;
