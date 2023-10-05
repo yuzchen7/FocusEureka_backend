@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
 router.get('/currentUser', async (req, res) => {
     try{
         const userId = req.query.userId;
-        const current_user_schdule = await Schedule.findOne({where:{id:userId}});
+        const current_user_schdule = await Schedule.findOne({where:{user_id:userId}});
         current_user_schdule
         ?res.status(200).json(current_user_schdule)
         :res.status(404).json("current user's schedule does not exist");
