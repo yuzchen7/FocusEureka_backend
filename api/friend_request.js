@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { friend_request, User,friend_list } = require("../db/models");
 const db = require("../db")
+const { Op } = require('sequelize')
 
 const user_arrtibutes_filter = ['id','first_name','last_name','middle_name','username'];
 
@@ -30,7 +31,7 @@ router.get("/", async (req, res, next) => {
 //get all friend requests stored in the database that belong to current user
 router.get("/sending", async (req, res, next) => {
     try{
-        const username = req.query.username;
+        const user_id = req.query.userid;
         const friend_request_data = await User.findAll({ 
             include: [
                 {
@@ -44,7 +45,7 @@ router.get("/sending", async (req, res, next) => {
               ],
               attributes: user_arrtibutes_filter,
               order: [['id', 'ASC']],
-              where:{username:username} 
+              where:{id:user_id} 
         });
         friend_request_data?
             res.status(200).json(friend_request_data)
@@ -57,42 +58,77 @@ router.get("/sending", async (req, res, next) => {
 //create a new friend request and store it in the database
 router.post("/createRequest", async (req, res, next) => {
     try{
-        const currentUser = req.body.requester;
-        const targetUser = req.body.receiver;
-        const requester = await User.findOne({ where:{username:currentUser} });
-        const receiver = await User.findOne({ where:{username:targetUser} });
+        const currentUser_id = req.body.requester;
+        const targetUser_id = req.body.receiver;
+        
+        const requester = await User.findOne({ where:{id:currentUser_id} });
+        if (!requester) {
+            res.status(404);
+            throw new Error("No such user found")
+        };
+        
+        const receiver = await User.findOne({ where:{id:targetUser_id} });
+        if (!receiver) {
+            res.status(404);
+            throw new Error("No such user found")
+        };
+
+        // check if current user and target user are already friends
+        await friend_list.findOne({
+            where: {
+                [Op.or]: [
+                    {
+                        ownerid: currentUser_id,
+                        friendid: targetUser_id,
+                    },
+                    {
+                        ownerid: currentUser_id,
+                        friendid: targetUser_id,
+                    },
+                ],
+            },
+        }).then((results) => {
+            if (!results) {
+                res.status(400);
+                throw new Error("friend already exists");
+            }
+        });
 
         const reuqest = await friend_request.create({
-            ownerid: requester.id,
-            targetid: receiver.id
-        });
+            ownerid: currentUser_id,
+            targetid: targetUser_id
+        }).catch(error => {
+            res.status(400);
+            throw new Error("friend already request");
+        })
+
         reuqest?
             res.status(200).json(reuqest)
-            :res.status(404).send("Current User's Friend Request Not Found");
+            :res.send("Current User's Friend Request Not Found");
     }catch(error){
+        console.error("error -> ", error);
+        res.send({message : error.message});
         next(error);
     }
 })
 
 router.post("/acceptRequest", async (req, res, next) => {
     try{
-        const currentUser = req.body.accepter;
-        const targetUser = req.body.receiver;
+        const currentUser_id = req.body.accepter;
+        const targetUser_id = req.body.receiver;
         //the user who accepts the friend request
-        const accepter = await User.findOne({ where:{username:currentUser} });
+        const accepter = await User.findOne({ where:{id:currentUser_id} });
+        if (accepter == null) throw new Error;
         //the user who sends the friend request
-        const receiver = await User.findOne({ where:{username:targetUser} });
+        const receiver = await User.findOne({ where:{id:targetUser_id} });
+        if (receiver == null) throw new Error;
 
         await friend_list.create({
-            ownerid: accepter.id,
-            friendid: receiver.id
-        });
-        await friend_list.create({
-            ownerid: receiver.id,
-            friendid: accepter.id
+            ownerid: currentUser_id,
+            friendid: targetUser_id
         });
 
-        const deleteRequest = await friend_request.destroy({where:{ownerid:receiver.id,targetid:accepter.id}});
+        const deleteRequest = await friend_request.destroy({where:{ownerid:targetUser_id,targetid:currentUser_id}});
         deleteRequest?
             res.status(200).json(deleteRequest)
             :res.status(404).send("Current User's Friend Request Not Found");
@@ -103,19 +139,23 @@ router.post("/acceptRequest", async (req, res, next) => {
 
 router.get("/receiving", async (req, res, next) => {
     try{
-        const username = req.query.username;
-        const sql = `select 
-        u2.first_name as requester_firstName,
-        u2.last_name as requester_lastName,
-        u2.middle_name as requester_middleName,
-        u2.username as requester_username,
-        u1.first_name as accepter_firstName,
-        u1.last_name as accepter_lastName,
-        u1.middle_name as accepter_middleName,
-        u1.username as accepter_username
-        from friend_requests left join users as u1 on U1.id = friend_requests.targetid left join users AS u2 on u2.id = friend_requests.ownerid
-        WHERE u1.username = '${username}';`;
-        const [results, metadata] = await db.query(sql)
+        const target_id = req.query.targetid;
+        const sql = `SELECT 
+                        owner.id,
+                        owner.first_name,
+                        owner.middle_name,
+                        owner.last_name,
+                        owner.username
+                    FROM
+                        users as owner
+                    LEFT JOIN
+                        friend_requests as fr
+                    ON
+                        owner.id = fr.ownerid
+                    WHERE
+                        fr.targetid = '${target_id}'
+                    ;`;
+        const [results, metadata] = await db.query(sql).catch(error => console.error(error));
         results?
             res.status(200).json(results)
             :res.status(404).send("Current User's Friend Request Not Found");
