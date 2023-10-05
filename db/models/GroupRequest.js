@@ -5,10 +5,9 @@ const User = require("./user");
 const group = require("./Group");
 
 const group_request = db.define("group_request", {
-   id : {
+   onwer_id : {
       type : DataTypes.INTEGER,
       allowNull : false,
-      unique : true,
       primaryKey : true,
       autoIncrement : true,
       validate : {
@@ -20,6 +19,7 @@ const group_request = db.define("group_request", {
    request_id : {
       type : DataTypes.INTEGER,
       allowNull : false,
+      primaryKey : true,
       validate : {
          isInt : true,
          notEmpty : true
@@ -33,6 +33,7 @@ const group_request = db.define("group_request", {
   group_id : {
       type : DataTypes.INTEGER,
       allowNull : false,
+      primaryKey : true,
       validate : {
          isInt : true,
          notEmpty : true
