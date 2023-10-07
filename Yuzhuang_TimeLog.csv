@@ -2,3 +2,4 @@ Date,Time,Description,Duration
 10/02/23,3:00pm ~ 6:00pm,re-design the post like table model; implement post_like and its relationship between user and post model; help Kaifeng solve the association error occur in the post endpoint.,3 hours
 10/04/23,4:00pm ~ 8:00pm,implement and re-desigen the schedule db; fix friend_request by adding more prevent condidtion to check on; fix and improve the raw sql for get all friends and list friends request endpoint.,4 hours
 10/05/23,12:00pm ~ 4:00pm,re-desigen the group_request db; fix friend_request and user api endpoint check condidtion error bug; implement some of the endpoint from group api.,4 hours
+10/06/23,10:00pm ~ 12:00pm,learn swiftui and build a test project using github api,2 hours
