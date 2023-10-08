@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User, group, group_member, group_request } = require('../db/models');
+const db = require('../db');
 
 router.get('/', async (req, res, next) => {
 
@@ -192,7 +193,25 @@ router.post('/grouprequest', async (req, res, next) => {
 });
 
 router.get('/receiverequest', async (req, res, next) => {
-
+   try {
+      const receiver_id = req.params.receiverid;
+      const result = await User.findAll({
+         include : [
+            {
+               model : group_request
+            }
+         ],
+         where : {
+            acceptor_id : receiver_id
+         }
+      });
+      result ?
+         res.status(200).json(result)
+         : res.status(404).send({message:"Founding receiver filed"});
+   } catch (err) {
+      console.log(err);
+      res.status(400).send({message:"receiver request error"});
+   }
 });
 
 router.post('/acceptrequest', async (req, res, next) => {
