@@ -67,14 +67,18 @@ group.belongsToMany(User, {
 
 group.belongsToMany(User, {
    through : group_request,
-   foreignKey : "requester_id",
-   otherKey : "acceptor_id"
+   foreignKey : "requester_id"
+});
+
+group.belongsToMany(User, {
+   through : group_request,
+   foreignKey : "acceptor_id"
 });
 
 User.belongsToMany(group, {
    through : group_request,
    foreignKey : "group_id"
-})
+});
 
 module.exports = {
    User, friend_list, friend_request,
