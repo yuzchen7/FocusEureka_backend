@@ -27,8 +27,42 @@ router.get('/mygroups', async (req, res, next) => {
    }
 });
 
-router.get('/newgroup', async (req, res, next) => {
-   
+router.post('/newgroup', async (req, res, next) => {
+   try {
+      const ownerid = req.body.userid;
+      const name = req.body.name ? req.body.groupname : "unnamed";
+      const meet_date = req.body.meetdate;
+      const meet_time = req.body.meettime;
+      const address = req.body.address;
+      const city = req.body.city;
+      const state = req.body.state;
+      const zipcode = req.body.zip;
+
+      const grouinfo = await group.findOne({
+         where : {
+            ownerid : ownerid, 
+            name : name
+         }
+      }).then(async result => {
+         if (result) {
+            res.status(400);
+            throw new Error("Group already exists");
+         }
+
+         const result_create = await group.create({
+            ownerid, name, meet_date, meet_time,
+            address, city, state, zipcode
+         });
+
+         result_create ?
+            res.status(201).json(result_create)
+            : res.status(400).send({message: "group create failed"});
+      });
+
+   } catch (err) {
+      res.send({message: err.message});
+      next(err);
+   }
 });
 
 router.post('/groupmember', async (req, res, next) => {
