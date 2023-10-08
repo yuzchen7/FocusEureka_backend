@@ -65,7 +65,8 @@ group.belongsToMany(User, {
    foreignKey : 'group_id'
 });
 
-User.belongsToMany(group, {
+User.hasMany(group);
+group.belongsTo(User, {
    through : {
       model: group_request,
       unique:false
@@ -73,7 +74,7 @@ User.belongsToMany(group, {
    foreignKey : "requester_id"
 });
 
-User.belongsToMany(group, {
+group.belongsTo(User, {
    through : {
       model: group_request,
       unique:false
