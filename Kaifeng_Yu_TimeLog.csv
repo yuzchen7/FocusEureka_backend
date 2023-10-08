@@ -3,3 +3,4 @@ Date,Time,Description,Duration
 10/3/2023, 12:00pm~03:00pm, modified the association between user and psots models and completed the endpoints related to post models (retrieve data for Likes), each endpoints are repeatedly tested through Postman, 3 hours 
 10/4/2023, 04:00pm~08:00pm, modified two endpoints related to post models, implemented three endpoints related to comments models, debugged posts/signView endpoint, 4 hours
 10/5/2023, 12:00pm~04:00pm, Assisted in redesign of the group request model, debugged two errors related to friend request and signup endpoints, and implemented three endpoints related to schedule models, 4 hours
+10/8/2023, 12:00pm~03:00pm, Implemented one endpoint related to schedule model, debugged unique constraint error, and attempted to debug assocciation error related to group request model, 3 hours
