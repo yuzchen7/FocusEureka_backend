@@ -54,6 +54,11 @@ router.post('/newgroup', async (req, res, next) => {
             address, city, state, zipcode
          });
 
+         const add_user = await group_member.create({
+            group_id : result_create.dataValues.id,
+            member_id : result_create.dataValues.ownerid
+         });
+
          result_create ?
             res.status(201).json(result_create)
             : res.status(400).send({message: "group create failed"});
