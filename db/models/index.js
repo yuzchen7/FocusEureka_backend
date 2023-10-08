@@ -81,13 +81,12 @@ User.belongsToMany(group, {
    foreignKey : "acceptor_id",
 });
 
-User.belongsToMany(group, {
-   through :{
-      model:group_request,
-      unique:false
-   },
-   foreignKey : "group_id",
-});
+// group.hasMany(group_request,{
+//    foreignKey:"group_id",
+// });
+// group_request.belongsTo(group,{
+//    foreignKey:"group_id",
+// })
 
 module.exports = {
    User, friend_list, friend_request,
