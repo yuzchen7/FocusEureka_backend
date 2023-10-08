@@ -65,8 +65,59 @@ router.post('/newgroup', async (req, res, next) => {
    }
 });
 
-router.post('/groupmember', async (req, res, next) => {
+// get all the current group members by given group id information
+router.get('/groupinfo', async (req, res, next) => {
+   try {
+      const group_id = req.query.groupid;
+      const result = await group.findOne({
+         include : [
+            {
+               model : User,
+               attributes : ['id','first_name','last_name','middle_name','username']
+            },
+         ],
+         where : {
+            id : group_id
+         }
+      }).then(async result => {
+         if (!result) { // make sure the group is already exists
+            res.status(400);
+            throw new Error("group is not exist");
+         }
+   
+         const userinfo = await User.findOne({
+            where : {
+               id : result.ownerid
+            },
+            attributes : ['id','first_name','last_name','middle_name', 'username']
+         }).catch(err => {
+            res.status(400);
+            err.message = "not able find group onwer";
+            throw err;
+         });
+   
+         if (!userinfo) { // make sure user info is vaild
+            res.status(400);
+            throw new Error("not able find group onwer");
+         }
+   
+         delete result.dataValues.ownerid; //delete ownerid property from result json
+         result.dataValues.onwer = userinfo; // add onwer user info ro result json
 
+         return result;
+
+      }).catch(err => {
+         res.status(500);
+         throw err;
+      });
+
+      result ?
+         res.status(200).json(result)
+         : res.status(400).send({message: "find group failed"});
+   } catch (err) {
+      res.send({message: err.message});
+      next(err);
+   }
 });
 
 // onwer -> user
