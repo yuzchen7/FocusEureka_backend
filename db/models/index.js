@@ -69,17 +69,17 @@ User.hasMany(group);
 group.belongsTo(User, {
    through : {
       model: group_request,
-      unique:false
+      unique:false,
+      foreignKey : "requester_id"
    },
-   foreignKey : "requester_id"
 });
 
 group.belongsTo(User, {
    through : {
       model: group_request,
-      unique:false
+      unique:false,
+      foreignKey : "acceptor_id",
    },
-   foreignKey : "acceptor_id",
 });
 
 // group.hasMany(group_request,{
