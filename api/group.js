@@ -30,7 +30,7 @@ router.get('/mygroups', async (req, res, next) => {
 router.post('/newgroup', async (req, res, next) => {
    try {
       const ownerid = req.body.userid;
-      const name = req.body.name ? req.body.groupname : "unnamed";
+      const name = req.body.groupname ? req.body.groupname : "Unnamed";
       const meet_date = req.body.meetdate;
       const meet_time = req.body.meettime;
       const address = req.body.address;
