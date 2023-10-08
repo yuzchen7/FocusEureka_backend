@@ -65,7 +65,7 @@ group.belongsToMany(User, {
    foreignKey : 'group_id'
 });
 
-User.hasMany(group);
+// User.hasMany(group, {through : "owner_id"});
 group.belongsTo(User, {
    through : {
       model: group_request,
