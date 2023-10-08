@@ -46,4 +46,19 @@ router.post('/create', async (req, res, next) => {
         next(error)
     }
 })
+
+router.put('/update', async (req, res, next) => {
+    try{
+        const updateData = req.body;
+        const foundSchedule = await Schedule.findOne({where:{user_id:updateData.user_id}})
+        if(foundSchedule){
+            await foundSchedule.update(req.body);
+            res.status(200).json(foundSchedule);
+        }else{
+            res.status(404).json("update unsuccessfully")
+        }
+    }catch(error){
+        next(error)
+    }
+})
 module.exports = router;
