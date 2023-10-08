@@ -186,6 +186,10 @@ router.post('/grouprequest', async (req, res, next) => {
    }
 });
 
+router.get('/receiverequest', async (req, res, next) => {
+
+});
+
 router.post('/acceptrequest', async (req, res, next) => {
 
 });
