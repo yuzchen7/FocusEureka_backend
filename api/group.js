@@ -194,19 +194,33 @@ router.post('/grouprequest', async (req, res, next) => {
 
 router.get('/receiverequest', async (req, res, next) => {
    try {
-      const receiver_id = req.params.receiverid;
-      const result = await User.findAll({
-         include : [
-            {
-               model : group_request
-            }
-         ],
-         where : {
-            acceptor_id : receiver_id
-         }
-      });
-      result ?
-         res.status(200).json(result)
+      const receiver_id = req.query.receiverid;
+      const sql = `SELECT 
+                     u.id,
+                     u.first_name,
+                     u.middle_name,
+                     u.last_name,
+                     u.username,
+                     gr.group_id,
+                     g.name
+                  FROM 
+                     group_requests gr
+                  JOIN 
+                     users u
+                  ON
+                     u.id = gr.requester_id
+                  JOIN
+                     groups g
+                  ON
+                     g.id = gr.group_id
+                  where 
+                     acceptor_id = '${receiver_id}'
+                  ;`;
+
+      const [results, metadata] = await db.query(sql).catch(error => console.error(error));
+
+      results ?
+         res.status(200).json(results)
          : res.status(404).send({message:"Founding receiver filed"});
    } catch (err) {
       console.log(err);
