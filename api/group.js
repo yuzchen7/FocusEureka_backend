@@ -3,7 +3,7 @@ const { User, group, group_member, group_request } = require('../db/models');
 const db = require('../db');
 
 router.get('/', async (req, res, next) => {
-
+   res.status(200).json({message : "welcome to use group api"})
 });
 
 router.get('/mygroups', async (req, res, next) => {
