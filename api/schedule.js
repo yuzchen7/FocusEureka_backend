@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const{Schedule,User} = require('../db/models');
+const db = require("../db");
 const user_arrtibutes_filter = ['id','first_name','last_name','middle_name','username'];
 
 router.get('/', async (req, res,next) => {
@@ -58,6 +59,42 @@ router.put('/update', async (req, res, next) => {
             res.status(404).json("update unsuccessfully")
         }
     }catch(error){
+        next(error)
+    }
+})
+
+
+router.get('/seeAvalibleFriends', async (req, res, next) => {
+    try{
+        const weekday = req.query.weekday;
+        const owner_id = req.query.owner_id;
+        const sql = `
+        SELECT 
+                    u.id,
+                    u.first_name,
+                    u.middle_name,
+                    u.last_name,
+                    u.username
+                FROM 
+                    users AS u
+                WHERE 
+                    u.id IN (
+                      SELECT friendid
+                      FROM friend_lists AS fl left join schedules AS s on friendid = s.user_id
+                      WHERE fl.ownerid = '${owner_id}' AND s.${weekday} = true
+                    )
+                or 
+                    u.id IN (
+                      SELECT ownerid
+                      FROM friend_lists AS fl left join schedules AS s on ownerid = s.user_id
+                      WHERE fl.friendid = '${owner_id}' AND s.${weekday} = true
+                    )
+                ;`
+    const [seeAvalibleFriends, metadata] = await db.query(sql).catch(error => console.error(error));
+    seeAvalibleFriends?
+            res.status(200).json(seeAvalibleFriends)
+            :res.status(404).json("No friends avaliable")
+    }catch (error){
         next(error)
     }
 })
