@@ -39,13 +39,20 @@ router.post('/newgroup', async (req, res, next) => {
       const state = req.body.state;
       const zipcode = req.body.zip;
 
-      const grouinfo = await group.findOne({
-         where : {
-            ownerid : ownerid, 
-            name : name
-         }
-      }).then(async result => {
-         if (result) {
+      const result_create = await db.transaction(async t => {
+         const grouinfo = await group.findOne({
+            where : {
+               ownerid : ownerid, 
+               name : name
+            }
+         }, {
+            transaction : t
+         }).catch(err => {
+            err.message = "Group sql error";
+            throw err;
+         });
+
+         if (grouinfo) {
             res.status(400);
             throw new Error("Group already exists");
          }
@@ -53,18 +60,23 @@ router.post('/newgroup', async (req, res, next) => {
          const result_create = await group.create({
             ownerid, name, meet_date, meet_time,
             address, city, state, zipcode
+         }, {
+            transaction : t
          });
 
          const add_user = await group_member.create({
             group_id : result_create.dataValues.id,
             member_id : result_create.dataValues.ownerid
+         }, {
+            transaction : t
          });
 
-         result_create ?
-            res.status(201).json(result_create)
-            : res.status(400).send({message: "group create failed"});
+         return result_create;
       });
 
+      result_create ?
+         res.status(201).json(result_create)
+         : res.status(400).send({message: "group create failed"});
    } catch (err) {
       res.send({message: err.message});
       next(err);
