@@ -1,71 +1,71 @@
 const router = require('express').Router();
-const{Schedule,User} = require('../db/models');
+const { Schedule, User } = require('../db/models');
 const db = require("../db");
-const user_arrtibutes_filter = ['id','first_name','last_name','middle_name','username'];
+const user_arrtibutes_filter = ['id', 'first_name', 'last_name', 'middle_name', 'username'];
 
-router.get('/', async (req, res,next) => {
-    try{
+router.get('/', async (req, res, next) => {
+    try {
         const allWeekdays = await Schedule.findAll({
-            include:[{
-                model:User,
+            include: [{
+                model: User,
                 attributes: user_arrtibutes_filter
             }]
         });
         allWeekdays
-        ?res.status(200).json(allWeekdays)
-        :res.status(404).json("404 Not Found")
-    }catch(error){
+            ? res.status(200).json(allWeekdays)
+            : res.status(404).json("404 Not Found")
+    } catch (error) {
         next(error);
     }
 })
 
-router.get('/currentUser', async (req, res,next) => {
-    try{
+router.get('/currentUser', async (req, res, next) => {
+    try {
         const userId = req.query.userId;
-        const current_user_schdule = await Schedule.findOne({where:{user_id:userId}});
+        const current_user_schdule = await Schedule.findOne({ where: { user_id: userId } });
         current_user_schdule
-        ?res.status(200).json(current_user_schdule)
-        :res.status(404).json("current user's schedule does not exist");
-    }catch(error){
+            ? res.status(200).json(current_user_schdule)
+            : res.status(404).json("current user's schedule does not exist");
+    } catch (error) {
         next(error);
     }
 })
 
 router.post('/create', async (req, res, next) => {
-    try{
-        const findUser = await User.findOne({ where:{id:req.body.user_id} });
-        if(!findUser){
+    try {
+        const findUser = await User.findOne({ where: { id: req.body.user_id } });
+        if (!findUser) {
             res.status(400);
             throw new Error("No such user found");
         }
         const user_schedule = await Schedule.create(req.body);
         user_schedule
-        ?res.status(200).json(user_schedule)
-        :res.status(404).json("failed to create user's schedule");
-    }catch(error){
-        res.send({message : error.message});
+            ? res.status(200).json(user_schedule)
+            : res.status(404).json("failed to create user's schedule");
+    } catch (error) {
+        res.send({ message: error.message });
         next(error)
     }
 })
 
 router.put('/update', async (req, res, next) => {
-    try{
+    try {
         const updateData = req.body;
-        const foundSchedule = await Schedule.findOne({where:{user_id:updateData.user_id}})
-        if(foundSchedule){
+        const foundSchedule = await Schedule.findOne({ where: { user_id: updateData.user_id } })
+        if (foundSchedule) {
             await foundSchedule.update(req.body);
             res.status(200).json(foundSchedule);
-        }else{
+        } else {
             res.status(404).json("update unsuccessfully")
         }
-    }catch(error){
+    } catch (error) {
         next(error)
     }
 })
 
 
 router.get('/checkAvailableFriends', async (req, res, next) => {
-    try{
+    try {
         const weekday = req.query.weekday;
         const owner_id = req.query.owner_id;
         const sql = `
@@ -90,37 +90,37 @@ router.get('/checkAvailableFriends', async (req, res, next) => {
                       WHERE fl.friendid = '${owner_id}' AND s.${weekday} = true
                     )
                 ;`
-    const [AvailableFriends, metadata] = await db.query(sql).catch(error => console.error(error));
-    AvailableFriends?
+        const [AvailableFriends, metadata] = await db.query(sql).catch(error => console.error(error));
+        AvailableFriends ?
             res.status(200).json(AvailableFriends)
-            :res.status(404).json("No friends avaliable")
-    }catch (error){
+            : res.status(404).json("No friends avaliable")
+    } catch (error) {
+        console.log(error)
         next(error)
     }
 })
 
-router.put('/reset', async (req, res, next) =>{
-    try{
+router.put('/reset', async (req, res, next) => {
+    try {
         const userId = req.body.userId;
-        console.log(userId)
         const result = await db.transaction(async (t) => {
-            const resetSchedule = await Schedule.findOne({where:{user_id:userId}},{transaction: t})
+            const resetSchedule = await Schedule.findOne({ where: { user_id: userId } }, { transaction: t })
             await resetSchedule.update({
-                mon:true,
-                tue:true,
-                wed:true,
-                thu:true,
-                fri:true,
-                sat:true,
-                sun:true
-            },{transaction: t})
+                mon: true,
+                tue: true,
+                wed: true,
+                thu: true,
+                fri: true,
+                sat: true,
+                sun: true
+            }, { transaction: t })
 
             return resetSchedule
         })
-        result?
+        result ?
             res.status(200).json(result)
-            :res.status(404).json("rest failed")
-    }catch (error){
+            : res.status(404).json("rest failed")
+    } catch (error) {
         console.log(error)
         next(error)
     }
