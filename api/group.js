@@ -228,8 +228,50 @@ router.get('/receiverequest', async (req, res, next) => {
    }
 });
 
-router.post('/acceptrequest', async (req, res, next) => {
+router.get('/acceptrequest', async (req, res, next) => {
+   try {
+      const requester_id = req.query.requesterid;
+      const acceptor_id = req.query.acceptorid;
+      const group_id = req.query.groupid;
 
+      const result = await db.transaction(async (t) => {
+         const pending = await group_request.destroy({
+            where: {
+               requester_id,
+               acceptor_id,
+               group_id,
+            }
+         }).catch(err => {
+            err.massage = "request pending error.";
+            throw err;
+         }, {
+            transaction: t
+         });
+
+         console.log("number of line has be deleted ->", pending);
+         if (!pending) {
+            throw new Error("request pending not found.");
+         }
+
+         const result = await group_member.create({
+            member_id : acceptor_id,
+            group_id : group_id
+         }, {
+            transaction: t
+         });
+
+         return result;
+      });
+
+      result ?
+         res.status(200).json(result) 
+         : res.status(404).send({message: ""});
+
+   } catch (err) {
+      console.error(err);
+      res.status(400).send({message: err.message});
+      next(err);
+   }
 });
 
 module.exports = router;
