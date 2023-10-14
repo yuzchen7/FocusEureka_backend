@@ -64,7 +64,7 @@ router.put('/update', async (req, res, next) => {
 })
 
 
-router.get('/seeAvalibleFriends', async (req, res, next) => {
+router.get('/checkAvailableFriends', async (req, res, next) => {
     try{
         const weekday = req.query.weekday;
         const owner_id = req.query.owner_id;
@@ -90,9 +90,9 @@ router.get('/seeAvalibleFriends', async (req, res, next) => {
                       WHERE fl.friendid = '${owner_id}' AND s.${weekday} = true
                     )
                 ;`
-    const [seeAvalibleFriends, metadata] = await db.query(sql).catch(error => console.error(error));
-    seeAvalibleFriends?
-            res.status(200).json(seeAvalibleFriends)
+    const [AvailableFriends, metadata] = await db.query(sql).catch(error => console.error(error));
+    AvailableFriends?
+            res.status(200).json(AvailableFriends)
             :res.status(404).json("No friends avaliable")
     }catch (error){
         next(error)
