@@ -176,26 +176,37 @@ router.post('/grouprequest', async (req, res, next) => {
       const requester_id = req.body.requestid; // user
       const group_id = req.body.groupid; // onwer group
       
-      const groupinfo = await group.findOne({
-         where : {
-            id : group_id
-         }
-      }).then(async result => {
-         if (!result) {
+      const result = await db.transaction(async t => {
+         const groupinfo = await group.findOne({
+            where : {
+               id : group_id
+            }
+         }, {
+            transaction : t
+         }).catch(err => {
+            err.message = "error sql group info";
+            throw err;
+         });
+
+         if (!groupinfo) {
             res.status(404);
             throw new Error("No User or onwer founded");
          }
 
-         const acceptor_id = result.ownerid;
+         const acceptor_id = groupinfo.ownerid;
 
          const request_res = await group_request.create({
             requester_id, acceptor_id, group_id
+         }, {
+            transaction : t
          });
 
-         request_res ?
-            res.status(200).json({request_res, message: "request successfully created"})
-            : res.status(404).send({message: 'group request failed'});
+         return request_res;
       });
+
+      result ?
+         res.status(200).json({result, message: "request successfully created"})
+         : res.status(404).send({message: 'group request failed'});
 
    } catch (err) {
       console.error(err);
