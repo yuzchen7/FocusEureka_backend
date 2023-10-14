@@ -55,6 +55,40 @@ PostLike.belongsTo(User, {foreignKey : 'user_id'});
 Schedule.belongsTo(User, {foreignKey : 'user_id'});
 User.hasOne(Schedule, {foreignKey : 'user_id'});
 
+User.belongsToMany(group, {
+   through:group_member,
+   foreignKey : 'member_id'
+});
+
+group.belongsToMany(User, {
+   through:group_member,
+   foreignKey : 'group_id'
+});
+
+// User.hasMany(group, {through : "owner_id"});
+// group.belongsTo(User, {
+//    through : {
+//       model: group_request,
+//       unique:false,
+//       foreignKey : "requester_id"
+//    },
+// });
+
+// group.belongsTo(User, {
+//    through : {
+//       model: group_request,
+//       unique:false,
+//       foreignKey : "acceptor_id",
+//    },
+// });
+
+// group.hasMany(group_request,{
+//    foreignKey:"group_id",
+// });
+// group_request.belongsTo(group,{
+//    foreignKey:"group_id",
+// })
+
 module.exports = {
    User, friend_list, friend_request,
    group, group_member, group_request,
