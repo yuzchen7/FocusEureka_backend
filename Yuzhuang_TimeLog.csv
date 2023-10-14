@@ -5,3 +5,5 @@ Date,Time,Description,Duration
 10/06/23,10:00pm ~ 12:00am,learn swiftUI and build a test project using github api,2 hours
 10/07/23,10:00pm ~ 12:00am,implement groupinfo and create group endpoint,2hours
 10/08/23,12:00pm ~ 4:00pm,fix implementation logic error for create group endpoint; try to fix group_request and user association problem but not solve yet,4hours
+10/11/23,2:00pm ~ 3:00pm,implement a group receive request endpoint by using raw query sequelize framework doesn’t work,1hours
+10/14/23,2:00pm ~ 6:00pm,finish the last endpoint of groups; refactor all the group endpint by adding the transaction feat;help teammate set up swift,4hours 
