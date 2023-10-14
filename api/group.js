@@ -254,7 +254,7 @@ router.get('/acceptrequest', async (req, res, next) => {
          }
 
          const result = await group_member.create({
-            member_id : acceptor_id,
+            member_id : requester_id,
             group_id : group_id
          }, {
             transaction: t
