@@ -241,11 +241,11 @@ router.get('/acceptrequest', async (req, res, next) => {
                acceptor_id,
                group_id,
             }
+         }, {
+            transaction : t
          }).catch(err => {
             err.massage = "request pending error.";
             throw err;
-         }, {
-            transaction: t
          });
 
          console.log("number of line has be deleted ->", pending);
