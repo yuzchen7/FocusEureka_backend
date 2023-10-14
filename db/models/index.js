@@ -66,21 +66,21 @@ group.belongsToMany(User, {
 });
 
 // User.hasMany(group, {through : "owner_id"});
-group.belongsTo(User, {
-   through : {
-      model: group_request,
-      unique:false,
-      foreignKey : "requester_id"
-   },
-});
+// group.belongsTo(User, {
+//    through : {
+//       model: group_request,
+//       unique:false,
+//       foreignKey : "requester_id"
+//    },
+// });
 
-group.belongsTo(User, {
-   through : {
-      model: group_request,
-      unique:false,
-      foreignKey : "acceptor_id",
-   },
-});
+// group.belongsTo(User, {
+//    through : {
+//       model: group_request,
+//       unique:false,
+//       foreignKey : "acceptor_id",
+//    },
+// });
 
 // group.hasMany(group_request,{
 //    foreignKey:"group_id",
