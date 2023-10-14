@@ -101,25 +101,27 @@ router.get('/checkAvailableFriends', async (req, res, next) => {
 
 router.put('/reset', async (req, res, next) =>{
     try{
-        const userId = req.body;
+        const userId = req.body.userId;
+        console.log(userId)
         const result = await db.transaction(async (t) => {
             const resetSchedule = await Schedule.findOne({where:{user_id:userId}},{transaction: t})
             await resetSchedule.update({
                 mon:true,
                 tue:true,
-                wes:true,
+                wed:true,
                 thu:true,
                 fri:true,
                 sat:true,
                 sun:true
             },{transaction: t})
 
-            return result
+            return resetSchedule
         })
         result?
-            res.status(200).jason(result)
+            res.status(200).json(result)
             :res.status(404).json("rest failed")
     }catch (error){
+        console.log(error)
         next(error)
     }
 })
