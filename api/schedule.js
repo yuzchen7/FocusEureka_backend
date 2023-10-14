@@ -98,4 +98,29 @@ router.get('/checkAvailableFriends', async (req, res, next) => {
         next(error)
     }
 })
+
+router.put('/reset', async (req, res, next) =>{
+    try{
+        const userId = req.body;
+        const result = await sequelize.transaction(async (t) => {
+            const resetSchedule = await Schedule.findOne({where:{user_id:userId}},{transaction: t})
+            await resetSchedule.update({
+                mon:true,
+                tue:true,
+                wes:true,
+                thu:true,
+                fri:true,
+                sat:true,
+                sun:true
+            },{transaction: t})
+
+            return result
+        })
+        result?
+            res.status(200).jason(result)
+            :res.status(404).json("rest failed")
+    }catch (error){
+        next(error)
+    }
+})
 module.exports = router;
