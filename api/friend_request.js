@@ -59,7 +59,7 @@ router.get("/sending", async (req, res, next) => {
 router.post("/createRequest", async (req, res, next) => {
     try{
         const currentUser_id = req.body.requester;
-        const targetUser_id = req.body.receiver;
+        const targetUser_id = req.body.accepter;
         
         const requester = await User.findOne({ where:{id:currentUser_id} });
         if (!requester) {
@@ -67,8 +67,8 @@ router.post("/createRequest", async (req, res, next) => {
             throw new Error("No such user found")
         };
         
-        const receiver = await User.findOne({ where:{id:targetUser_id} });
-        if (!receiver) {
+        const accepter = await User.findOne({ where:{id:targetUser_id} });
+        if (!accepter) {
             res.status(404);
             throw new Error("No such user found")
         };
@@ -88,7 +88,7 @@ router.post("/createRequest", async (req, res, next) => {
                 ],
             },
         }).then((results) => {
-            if (!results) {
+            if (results) {
                 res.status(400);
                 throw new Error("friend already exists");
             }
@@ -115,13 +115,13 @@ router.post("/createRequest", async (req, res, next) => {
 router.post("/acceptRequest", async (req, res, next) => {
     try{
         const currentUser_id = req.body.accepter;
-        const targetUser_id = req.body.receiver;
+        const targetUser_id = req.body.requester;
         //the user who accepts the friend request
         const accepter = await User.findOne({ where:{id:currentUser_id} });
         if (accepter == null) throw new Error;
         //the user who sends the friend request
-        const receiver = await User.findOne({ where:{id:targetUser_id} });
-        if (receiver == null) throw new Error;
+        const requester = await User.findOne({ where:{id:targetUser_id} });
+        if (requester == null) throw new Error;
 
         await friend_list.create({
             ownerid: currentUser_id,
