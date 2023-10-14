@@ -151,23 +151,38 @@ router.post('/groupinvite', async (req, res, next) => {
       const acceptor_id = req.body.acceptid; // user
       const group_id = req.body.groupid;
 
-      const userinfo = await User.findOne({
-         where : {
-            id : acceptor_id
-         }
-      }).then (async result => {
-         if (!result) {
-            throw new Error("no such user founded");
+      const result = await db.transaction(async t => {
+         const userinfo = await User.findOne({
+            where : {
+               id : acceptor_id
+            }
+         }, {
+            transaction : t
+         }).catch(err => {
+            err.massage = "sql excuted failed";
+            throw err;
+         });
+
+         if (!userinfo) {
+            res.status(404);
+            return new Error("user not found");
          }
 
          const create_result = await group_request.create({
             requester_id, acceptor_id, group_id
+         }, {
+            transaction : t
+         }).catch(err => {
+            err.massage = "create sql excuted failed";
+            throw err;
          });
 
-         create_result ?
-            res.status(200).json({create_result, message: "invited successfully"})
-            : res.status(400).send({message: "invited failed"});
+         return create_result;
       });
+
+      result ?
+         res.status(200).json({result, message: "invited successfully"})
+         : res.status(400).send({message: "invited failed"});
 
    } catch (err) {
       console.error(err);
