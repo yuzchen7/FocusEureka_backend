@@ -102,7 +102,7 @@ router.get('/checkAvailableFriends', async (req, res, next) => {
 router.put('/reset', async (req, res, next) =>{
     try{
         const userId = req.body;
-        const result = await sequelize.transaction(async (t) => {
+        const result = await db.transaction(async (t) => {
             const resetSchedule = await Schedule.findOne({where:{user_id:userId}},{transaction: t})
             await resetSchedule.update({
                 mon:true,
