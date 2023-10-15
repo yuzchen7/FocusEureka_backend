@@ -108,7 +108,8 @@ router.post("/createRequest", async (req, res, next) => {
                 targetid: targetUser_id
             }).catch(error => {
                 res.status(400);
-                throw new Error("friend already request");
+                error.message = "friend already request"
+                throw error;
             });
 
             return reuqest
