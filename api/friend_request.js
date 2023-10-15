@@ -128,23 +128,45 @@ router.post("/acceptRequest", async (req, res, next) => {
     try{
         const currentUser_id = req.body.accepter;
         const targetUser_id = req.body.requester;
-        //the user who accepts the friend request
-        const accepter = await User.findOne({ where:{id:currentUser_id} });
-        if (accepter == null) throw new Error;
-        //the user who sends the friend request
-        const requester = await User.findOne({ where:{id:targetUser_id} });
-        if (requester == null) throw new Error;
 
-        await friend_list.create({
-            ownerid: currentUser_id,
-            friendid: targetUser_id
+        const results = await db.transaction(async t =>{
+            
+            //the user who accepts the friend request
+            const accepter = await User.findOne({ where:{id:currentUser_id} }, {transaction : t});
+            if (accepter == null) {
+                res.status(404);
+                throw new Error("User not found");
+            }
+
+            //the user who sends the friend request
+            const requester = await User.findOne({ where:{id:targetUser_id} }, {transaction : t});
+            if (requester == null) {
+                res.status(404);
+                throw new Error("User not found");
+            }
+
+            await friend_list.create({
+                ownerid: currentUser_id,
+                friendid: targetUser_id
+            }, {transaction : t}).catch(err => {
+                err.message = "firend aleady exsist"
+                throw err;
+            });
+
+            const deleteRequest = await friend_request.destroy({
+                where : {
+                    ownerid : targetUser_id,
+                    targetid:currentUser_id
+                }
+            }, {transaction : t});
+
+            return deleteRequest;
         });
-
-        const deleteRequest = await friend_request.destroy({where:{ownerid:targetUser_id,targetid:currentUser_id}});
-        deleteRequest?
-            res.status(200).json(deleteRequest)
+        results?
+            res.status(200).json(results)
             :res.status(404).send("Current User's Friend Request Not Found");
     }catch(error){
+        res.status(500).json({message : error.message});
         next(error);
     }
 })
