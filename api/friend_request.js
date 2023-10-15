@@ -60,50 +60,62 @@ router.post("/createRequest", async (req, res, next) => {
     try{
         const currentUser_id = req.body.requester;
         const targetUser_id = req.body.accepter;
-        
-        const requester = await User.findOne({ where:{id:currentUser_id} });
-        if (!requester) {
-            res.status(404);
-            throw new Error("No such user found")
-        };
-        
-        const accepter = await User.findOne({ where:{id:targetUser_id} });
-        if (!accepter) {
-            res.status(404);
-            throw new Error("No such user found")
-        };
 
-        // check if current user and target user are already friends
-        await friend_list.findOne({
-            where: {
-                [Op.or]: [
-                    {
-                        ownerid: currentUser_id,
-                        friendid: targetUser_id,
-                    },
-                    {
-                        ownerid: currentUser_id,
-                        friendid: targetUser_id,
-                    },
-                ],
-            },
-        }).then((results) => {
-            if (results) {
+        const results = await db.transaction(async (t) => {
+            const requester = await User.findOne({
+                where:{id:currentUser_id} 
+            }, {
+                transaction : t
+            });
+            if (!requester) {
+                res.status(404);
+                throw new Error("No such user found")
+            };
+
+            const accepter = await User.findOne({
+                where:{id:targetUser_id}
+            }, {
+                transaction : t
+            });
+            if (!accepter) {
+                res.status(404);
+                throw new Error("No such user found")
+            };
+
+            // check if current user and target user are already friends
+            await friend_list.findOne({
+                where: {
+                    [Op.or]: [
+                        {
+                            ownerid: currentUser_id,
+                            friendid: targetUser_id,
+                        },
+                        {
+                            ownerid: currentUser_id,
+                            friendid: targetUser_id,
+                        },
+                    ],
+                },
+            }).then((results) => {
+                if (results) {
+                    res.status(400);
+                    throw new Error("friend already exists");
+                }
+            });
+
+            const reuqest = await friend_request.create({
+                ownerid: currentUser_id,
+                targetid: targetUser_id
+            }).catch(error => {
                 res.status(400);
-                throw new Error("friend already exists");
-            }
+                throw new Error("friend already request");
+            });
+
+            return reuqest
         });
-
-        const reuqest = await friend_request.create({
-            ownerid: currentUser_id,
-            targetid: targetUser_id
-        }).catch(error => {
-            res.status(400);
-            throw new Error("friend already request");
-        })
-
-        reuqest?
-            res.status(200).json(reuqest)
+    
+        results?
+            res.status(200).json(results)
             :res.send("Current User's Friend Request Not Found");
     }catch(error){
         console.error("error -> ", error);
