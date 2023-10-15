@@ -96,6 +96,8 @@ router.post("/createRequest", async (req, res, next) => {
                         },
                     ],
                 },
+            }, {
+                transaction : t
             }).then((results) => {
                 if (results) {
                     res.status(400);
@@ -106,6 +108,8 @@ router.post("/createRequest", async (req, res, next) => {
             const reuqest = await friend_request.create({
                 ownerid: currentUser_id,
                 targetid: targetUser_id
+            }, {
+                transaction : t
             }).catch(error => {
                 res.status(400);
                 error.message = "friend already request"
