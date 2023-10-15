@@ -1,2 +1,9 @@
 Date,Time,Description,Duration
-10/2/23,3:00pm ~ 6:00pm,re-designed the post like table model; implement post_like and its relationship between user and post model; help Kaifeng solve the association error occur in the post endpoint.,3 hours
+10/02/23,3:00pm ~ 6:00pm,re-design the post like table model; implement post_like and its relationship between user and post model; help Kaifeng solve the association error occur in the post endpoint.,3 hours
+10/04/23,4:00pm ~ 8:00pm,implement and re-desigen the schedule db; fix friend_request by adding more prevent condidtion to check on; fix and improve the raw sql for get all friends and list friends request endpoint.,4 hours
+10/05/23,12:00pm ~ 4:00pm,re-desigen the group_request db; fix friend_request and user api endpoint check condidtion error bug; implement some of the endpoint from group api.,4 hours
+10/06/23,10:00pm ~ 12:00am,learn swiftUI and build a test project using github api,2 hours
+10/07/23,10:00pm ~ 12:00am,implement groupinfo and create group endpoint,2hours
+10/08/23,12:00pm ~ 4:00pm,fix implementation logic error for create group endpoint; try to fix group_request and user association problem but not solve yet,4hours
+10/11/23,2:00pm ~ 3:00pm,implement a group receive request endpoint by using raw query sequelize framework doesn’t work,1hours
+10/14/23,2:00pm ~ 6:00pm,finish the last endpoint of groups; refactor all the group endpint by adding the transaction feat;help teammate set up swift,4hours 
