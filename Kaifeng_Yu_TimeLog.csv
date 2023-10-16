@@ -6,4 +6,5 @@ Date,Time,Description,Duration
 10/8/2023, 12:00pm~03:00pm, Implemented one endpoint related to schedule model, debugged unique constraint error, and attempted to debug assocciation error related to group request model, 3 hours
 10/13/2023, 10:00pm~12:00am, Learned and practiced swift types, variables, array, set, dictionary, and functions, 2 hours
 10/14/2023, 10:00am~01:00pm, learned and praticed swift enum, operators, optionals, self, class, for loop, and inheritance, 3 hours
-10/13/2023, 02:00pm~06:00pm, Implemented two endpoints related to schedule model and prepare for Swift development, 4 hours 
+10/14/2023, 02:00pm~06:00pm, Implemented two endpoints related to schedule model and prepare for Swift development, 4 hours 
+10/15/2023, 01:00pm~05:00pm, learned and praticed swift storyboard and intro to UIkit, 4 hours
