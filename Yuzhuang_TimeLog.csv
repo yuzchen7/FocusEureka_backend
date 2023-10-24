@@ -6,5 +6,8 @@ Date,Time,Description,Duration
 10/07/23,10:00pm ~ 12:00am,implement groupinfo and create group endpoint,2hours
 10/08/23,12:00pm ~ 4:00pm,fix implementation logic error for create group endpoint; try to fix group_request and user association problem but not solve yet,4hours
 10/11/23,2:00pm ~ 3:00pm,implement a group receive request endpoint by using raw query sequelize framework doesn’t work,1hours
+10/13/23,12:00pm ~ 7:00pm,start the 1st swift practise project. It was a todo list app by using swiftUI and it’s foundation lib in the framework,7hours
 10/14/23,2:00pm ~ 6:00pm,finish the last endpoint of groups; refactor all the group endpint by adding the transaction feat;help teammate set up swift,4hours 
+10/17/23,11:00pm ~ 6:00pm,Working on the 1st swift todo list practice project by researching videos and finding blogs (such as stack overflow) to replace the old swift api with the new api in the swift todo list practice project.,7hours
 10/19/23,12:00pm ~ 6:00pm,learn and understand the behind of the notifications feature in swiftUI and add this feature into my swift practise project; and finish 1st swift practise project,6hours
+10/20/23,1:00pm ~ 2:00pm,implement the local notifications feature in swift ui code in the 1st swift practice project.,1hours
