@@ -1,4 +1,14 @@
 Date,Time,Description,Duration
+9/5/2023,1:00pm ~ 3:00pm,brainstorm the feature want to implement; other details of the project such the way to set up backend/frontend; start making the design document.,2hours
+9/6/2023,3:40pm ~ 6:40pm,brainstorm any optional / additional want to add into the project; designed out the Flow chart; and make up some Time Schedule.,3hours
+9/7/2023,10:00am ~ 4:00pm,finish up the design of Flow chart; brainstorm the database table and relationship; design out the ER diagram.,6hours
+9/8/2023,10:00am ~ 2:00pm,brainstorm the way to display the content; design out the view of the page; navigation between the page.,4hours
+9/12/2023,1:00pm ~ 3:00pm,setup backend and frontend repository(make repository and download add the dependency)、postman、postgresql、and etc.,2hours
+9/13/2023,2:00pm ~ 6:00pm,setup backend router; set up user table in database with user login check; set up router connect to database.,4hours
+9/14/2023,10:00am ~ 4:00pm,implement user、friend list、friend request table of the backend server(add friend feature); set up some of the dump data for testing; prepare the presentation at 09/18 (recording and editing demo video).,6hours
+9/16/2023,12:00pm ~ 6:00pm,implement group, group member、group request、like action(for post feature) table of the backend server; set up the dump for all the table and model setup today for testing purposes; try to fix the error with "is not associated to"; successful but need to find out the reason.,6hours
+9/18/2023,6:00pm ~ 10:00pm,improve the friend list module to achieve the same feature with saving more memory space; debugging the sequelizeEagerLoadingError and friend list endpoint with team meat; fixed by adding many to many associations; implemented retrieve the friend data set related to the user.,4hours
+9/22/2023,10:00am ~ 4:00pm,improve friend request module to achieve saving more memory space; improve image_set module structure; implement comment、image_set、post_like table for post included feature. Figure out the logic and the remove order of the database to implement the delete account feature.,6hours
 10/02/23,3:00pm ~ 6:00pm,re-design the post like table model; implement post_like and its relationship between user and post model; help Kaifeng solve the association error occur in the post endpoint.,3 hours
 10/04/23,4:00pm ~ 8:00pm,implement and re-desigen the schedule db; fix friend_request by adding more prevent condidtion to check on; fix and improve the raw sql for get all friends and list friends request endpoint.,4 hours
 10/05/23,12:00pm ~ 4:00pm,re-desigen the group_request db; fix friend_request and user api endpoint check condidtion error bug; implement some of the endpoint from group api.,4 hours
