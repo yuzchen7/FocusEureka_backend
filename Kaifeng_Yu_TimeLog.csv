@@ -15,3 +15,4 @@ Date,Time,Description,Duration
 10/21/2023, 01:00pm~02:00pm, Continued with the tutorials I didn't finish yesterday, refactoring the code from grid scrolling view to list view. Learned navigation stack and new features for button, 1 hour
 10/21/2023, 03:00pm~06:30pm, Learned network calling, error handling, alert, tab view, observeable object & @published for updating view, and loading view in SwiftUI, 3:30 hours
 10/22/2023, 03:00pm~06:00pm, learned some format styles included overlay, shadow, and blur effects. Also learned form container, toggle button, AppdefaultStorage, text validation through regex, and environment modifier in SwiftUI, 3 hours
+10/24/2023, 07:00pm~10:00pm, Learned network calling in SwiftUI through async & awai, @FocusState, review of data flow and ...etc, 3 hours
