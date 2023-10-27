@@ -76,6 +76,8 @@ const PostSeed = [
         city: "New York",
         state: "NY",
         zipcode: "10018",
+        start_time: "10:00",
+        end_time: "20:00",
         ownerid: "2",
         event: "false"
     },
