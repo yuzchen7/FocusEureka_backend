@@ -69,6 +69,18 @@ const PostSeed = [
         ownerid: "5",
         event: "true"
     },
+    {
+        title: "Kinokuniya",
+        contents: "Azaming book shop where you can buy manga and figures for your favorite anime",
+        address: "1073 Avenue of the Americas",
+        city: "New York",
+        state: "NY",
+        zipcode: "10018",
+        start_time: "10:00",
+        end_time: "20:00",
+        ownerid: "2",
+        event: "false"
+    },
 ];
 
 module.exports = PostSeed;

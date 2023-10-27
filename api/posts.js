@@ -21,6 +21,25 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.get("/event", async (req, res, next) => {
+  try {
+    const lookForEvent = req.query.lookForEvent;
+    const allposts = await post.findAll({
+      include: [{ model: ImageSet },
+      { model: User, as: 'owner', attributes: user_arrtibutes_filter },
+      { model: PostLike, include: [{ model: User, attributes: user_arrtibutes_filter }] }],
+      where: { event: lookForEvent },
+      order: [['id', 'DESC']]
+    });
+
+    allposts
+      ? res.status(200).json(allposts)
+      : res.status(404).send("Posts Not Found");
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get("/singleView", async (req, res, next) => {
   const postId = req.query.postId;
   try {
