@@ -22,3 +22,4 @@ Date,Time,Description,Duration
 10/19/23,12:00pm ~ 6:00pm,learn and understand the behind of the notifications feature in swiftUI and add this feature into my swift practise project; and finish 1st swift practise project,6hours
 10/20/23,1:00pm ~ 2:00pm,implement the local notifications feature in swift ui code in the 1st swift practice project.,1hours
 10/26/23,1:00pm ~ 6:00pm,start user login in, out, and sign up testing project in swift-will be move to actual project; implement login/signup/userProfile view; user model; and other small compoment,5hours
+11/03/23,6:00am ~ 6:00pm,implement the login, logout, signup feature in testing project; implement the auto login with keychain feature with Security framework; change some of the UI feature,12hours
