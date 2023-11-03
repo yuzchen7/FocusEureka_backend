@@ -19,3 +19,4 @@ Date,Time,Description,Duration
 10/26/2023, 08:00pm~10:00pm, updated endpoints related to auth/, review async & await, and learned pagination, 2 hours
 10/27/2023, 05:00pm~10:00pm, Implemented an endpoint related to posts and completed working code that successfully fetches data from localhost backend, 5 hours
 10/29/2023, 07:00pm~10:00pm, Leanred how to use Github with Xcode and how to send data to the backend. worked on displaying images on the posts view, 3 hours
+11/2/2023, 07:00pm~10:30pm, Add styling to posts view and created post detail view that can redirect from posts view, 3:30 hours
