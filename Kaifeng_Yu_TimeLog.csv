@@ -20,3 +20,5 @@ Date,Time,Description,Duration
 10/27/2023, 05:00pm~10:00pm, Implemented an endpoint related to posts and completed working code that successfully fetches data from localhost backend, 5 hours
 10/29/2023, 07:00pm~10:00pm, Leanred how to use Github with Xcode and how to send data to the backend. worked on displaying images on the posts view, 3 hours
 11/2/2023, 07:00pm~10:30pm, Add styling to posts view and created post detail view that can redirect from posts view, 3:30 hours
+11/3/2023, 01:00pm~02:00pm, Assisted and debugged network request errors, 1 hour
+11/3/2023, 08:00pm~11:30pm, Refactored code and researched how to upload images and store them in Firebase, 3:30 hours
