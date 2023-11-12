@@ -26,3 +26,4 @@ Date,Time,Description,Duration
 11/5/2023, 02:00pm~06:00pm, Completed the functionality of displaying a single post view and the basic setup of the photo picker, 4 hours
 11/8/2023, 07:00pm~10:30pm, completed the functionality of image selection and upload them to Firebase storage, 3:30 hours
 11/10/2023, 01:00pm~07:00pm, Transfer all usable code to the new repository, search for how to add a .gitignore file to Xcode projects, and complete the functionality of getting the url from Firebase, 6 hours
+11/11/2023, 04:00pm~08:00pm, research and modify firebase api call from synchronous to asynchronous, 4 hours
