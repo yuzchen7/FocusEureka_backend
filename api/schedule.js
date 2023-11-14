@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Schedule, User } = require('../db/models');
 const db = require("../db");
+const schedule = require('../db/models/Schedule');
 const user_arrtibutes_filter = ['id', 'first_name', 'last_name', 'middle_name', 'username'];
 
 router.get('/', async (req, res, next) => {
@@ -23,8 +24,20 @@ router.get('/currentUser', async (req, res, next) => {
     try {
         const userId = req.query.userId;
         const current_user_schdule = await Schedule.findOne({ where: { user_id: userId } });
+        const returnobj = {
+            "user_id" : current_user_schdule.user_id,
+            schedules : [
+                {day : "Sunday", isAvaliable : current_user_schdule.sun},
+                {day : "Monday", isAvaliable : current_user_schdule.mon}, 
+                {day : "Tuesday", isAvaliable : current_user_schdule.tue}, 
+                {day : "Wednesday", isAvaliable : current_user_schdule.wed}, 
+                {day : "Thursday", isAvaliable : current_user_schdule.thu}, 
+                {day : "Firday", isAvaliable : current_user_schdule.fri}, 
+                {day : "Saturday", isAvaliable : current_user_schdule.sat}
+            ]
+        }
         current_user_schdule
-            ? res.status(200).json(current_user_schdule)
+            ? res.status(200).json(returnobj)
             : res.status(404).json("current user's schedule does not exist");
     } catch (error) {
         next(error);
