@@ -67,7 +67,19 @@ router.put('/update', async (req, res, next) => {
         const foundSchedule = await Schedule.findOne({ where: { user_id: updateData.user_id } })
         if (foundSchedule) {
             await foundSchedule.update(req.body);
-            res.status(200).json(foundSchedule);
+            const returnobj = {
+                "user_id" : foundSchedule.user_id,
+                schedules : [
+                    {day : "Sunday", isAvaliable : foundSchedule.sun},
+                    {day : "Monday", isAvaliable : foundSchedule.mon}, 
+                    {day : "Tuesday", isAvaliable : foundSchedule.tue}, 
+                    {day : "Wednesday", isAvaliable : foundSchedule.wed}, 
+                    {day : "Thursday", isAvaliable : foundSchedule.thu}, 
+                    {day : "Firday", isAvaliable : foundSchedule.fri}, 
+                    {day : "Saturday", isAvaliable : foundSchedule.sat}
+                ]
+            }
+            res.status(200).json(returnobj);
         } else {
             res.status(404).json("update unsuccessfully")
         }
