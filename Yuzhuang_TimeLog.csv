@@ -25,3 +25,9 @@ Date,Time,Description,Duration
 11/03/23,6:00am ~ 6:00pm,implement the login, logout, signup feature in testing project; implement the auto login with keychain feature with Security framework; change some of the UI feature,12hours
 11/04/23,12:00pm ~ 4:00pm,prepare and outline the final presentation slide,4hours
 11/04/23,9:00pm ~ 12:00am,development an axios like tool for fetch endpoint in siwft(ver 0.0.1 alpha -> only post request successful),3hours
+11/07/23,12:00pm ~ 5:00pm,add get request in to axios like tool; implement personal view page(not finished yet) with the personal schedule view,5hours
+11/08/23,9:00pm ~ 10:00pm,try to fix the miss repository fro frontend but not work; create a new one; transplants Swiftxios from test porject to actual project,1hours
+11/11/23,5:00pm ~ 6:00pm,try to fix xcode tracking shouldn't trcck; init the baisc view to project in main,1hours
+11/12/23,8:00pm ~ 9:00pm,proting all the feature and views from the testing project to the actual project,1hours
+11/13/23,9:00pm ~ 1:00am,impl the weeday schedule view; build another git repository for project because it was carsh and unable to open(try to fix it but not work); proted the Swiftxios tool from old project; 5hours
+11/17/23,8:00am ~ 12:00pm,fix the display not reloading error for schedule view; change the return obj of schedule,4hours
