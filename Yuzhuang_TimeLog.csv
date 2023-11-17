@@ -30,4 +30,4 @@ Date,Time,Description,Duration
 11/11/23,5:00pm ~ 6:00pm,try to fix xcode tracking shouldn't trcck; init the baisc view to project in main,1hours
 11/12/23,8:00pm ~ 9:00pm,proting all the feature and views from the testing project to the actual project,1hours
 11/13/23,9:00pm ~ 1:00am,impl the weeday schedule view; build another git repository for project because it was carsh and unable to open(try to fix it but not work); proted the Swiftxios tool from old project; 5hours
-11/17/23,8:00am ~ 12:00pm,fix the display not reloading error for schedule view; change the return obj of schedule,4hours
+11/17/23,8:00am ~ 12:00pm,fix the display not reloading error for schedule view; change the return obj of schedule; new feature for Swiftxios tools,4hours
