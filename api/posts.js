@@ -150,4 +150,17 @@ router.get("/currentUser", async (req, res, next) => {
   }
 });
 
+//endpoint for user to add likes to their favorites posts
+router.post("/Likes", async (req, res, next) => {
+  try{
+    const likesData = req.body;
+    const likes = await PostLike.create(likesData);
+    likes
+      ? res.status(200).json(likes)
+      : res.status(404).send("your likes is gone~~~");
+  }catch (error) {
+    next(error);
+  }
+})
+
 module.exports = router;
