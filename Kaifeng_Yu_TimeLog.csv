@@ -27,4 +27,5 @@ Date,Time,Description,Duration
 11/8/2023, 07:00pm~10:30pm, completed the functionality of image selection and upload them to Firebase storage, 3:30 hours
 11/10/2023, 01:00pm~07:00pm, Transfer all usable code to the new repository, search for how to add a .gitignore file to Xcode projects, and complete the functionality of getting the url from Firebase, 6 hours
 11/11/2023, 04:00pm~08:00pm, research and modify firebase api call from synchronous to asynchronous, 4 hours
-11/17/2023, 06:00pm~11:30pm, transferred all usable code to the new repository for 2nd time, spend some time resolving merge conflicts and completed the functionality for creating posts, 5:30 hours
+11/16/2023, 06:00pm~11:30pm, transferred all usable code to the new repository for 2nd time, spend some time resolving merge conflicts and completed the functionality for creating posts, 5:30 hours
+11/17/2023, 06:00pm~9:30pm, Added functionality of dismissing keyboard & Likes, researched on pinterest grid view, 3:30 hours
