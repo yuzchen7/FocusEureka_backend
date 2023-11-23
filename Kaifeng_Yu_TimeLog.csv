@@ -31,3 +31,4 @@ Date,Time,Description,Duration
 11/17/2023, 06:00pm~9:30pm, Added functionality of dismissing keyboard & Likes, researched on pinterest grid view, 3:30 hours
 11/18/2023, 07:00pm~10:00pm, formated the layout of post view into pinterest gride view, increased the amount of dummy data, encountered a bug related to photopicker and successfully resloved, 3 hours
 11/19/2023, 04:30pm~07:30pm, refactored pinterest gride view into a component, add style and format post view & post detail view, and created a component for comments, 3 hours
+11/22/2023, 6:00pm~11:00pm, Attempted to update the total number of likes of a post without refreshing the view, 5 hours
