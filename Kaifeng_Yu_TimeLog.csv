@@ -34,3 +34,4 @@ Date,Time,Description,Duration
 11/22/2023, 06:00pm~11:00pm, Attempted to update the total number of likes of a post without refreshing the view, 5 hours
 11/23/2023, 05:00pm~09:00pm, Completed the functionality of updating the view without refreshing/reloading and fixed the issue of resetting the position of scrolling view, 4 hours
 11/25/2023, 06:00pm~9:00pm, completed the feature that allows users to switch post types within the posts view, 3 hours
+11/26/2023. 01:30pm~4:30pm, Worked on the styling and layout of the post detail view and refactored the codes for posts view, 3 hours
