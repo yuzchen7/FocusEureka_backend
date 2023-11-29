@@ -5,20 +5,21 @@ const User = require("./user");
 const group = require("./Group");
 
 const group_member = db.define("group_member", {
-   id : {
-      type : DataTypes.INTEGER,
-      allowNull : false,
-      unique : true,
-      primaryKey : true,
-      autoIncrement : true,
-      validate : {
-         isInt : true,
-         notEmpty : true
-      }
-   },
+   // id : {
+   //    type : DataTypes.INTEGER,
+   //    allowNull : false,
+   //    unique : true,
+   //    primaryKey : true,
+   //    autoIncrement : true,
+   //    validate : {
+   //       isInt : true,
+   //       notEmpty : true
+   //    }
+   // },
 
    member_id : {
       type : DataTypes.INTEGER,
+      primaryKey : true,
       allowNull : false,
       validate : {
          isInt : true,
@@ -32,6 +33,7 @@ const group_member = db.define("group_member", {
 
    group_id : {
       type : DataTypes.INTEGER,
+      primaryKey : true,
       allowNull : false,
       validate : {
          isInt : true,

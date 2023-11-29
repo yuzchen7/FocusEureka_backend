@@ -4,11 +4,11 @@ const friend_request = require("./FriendRequest");
 const group = require("./Group");
 const group_member = require("./GroupMember");
 const group_request = require("./GroupRequest");
-const like_action = require("./LikeAction");
 const post = require("./Post");
 const ImageSet = require("./ImageSet");
 const PostLike = require("./PostLike");
 const Comment = require("./Comment");
+const Schedule = require("./Schedule");
 
 /* 
    some relationship are state in the db models js file, which is Enforcing a foreign key 
@@ -31,17 +31,67 @@ User.belongsToMany(User, {
    otherKey: 'targetid',
 });
 
-ImageSet.belongsTo(post);
+ImageSet.belongsTo(post,{ foreignKey: 'post_id' });
+post.hasOne(ImageSet,{ foreignKey: 'post_id' });
 
-Comment.hasOne(Comment, {
+Comment.hasMany(Comment, {
    as : "reply_comment",
    foreignKey: "reply_comment_id",
    allowNull: true,
 });
 
+post.belongsTo(User,{as:'owner',foreignKey:'ownerid'});
+User.hasMany(post,{foreignKey:'ownerid'});
+
+Comment.belongsTo(post,{ foreignKey: 'post_id' });
+post.hasMany(Comment,{ foreignKey: 'post_id' });
+
+post.hasMany(PostLike, { foreignKey: 'post_id'});
+PostLike.belongsTo(post, { foreignKey : 'post_id' });
+
+User.hasMany(PostLike, {foreignKey : 'user_id'});
+PostLike.belongsTo(User, {foreignKey : 'user_id'});
+
+Schedule.belongsTo(User, {foreignKey : 'user_id'});
+User.hasOne(Schedule, {foreignKey : 'user_id'});
+
+User.belongsToMany(group, {
+   through:group_member,
+   foreignKey : 'member_id'
+});
+
+group.belongsToMany(User, {
+   through:group_member,
+   foreignKey : 'group_id'
+});
+
+// User.hasMany(group, {through : "owner_id"});
+// group.belongsTo(User, {
+//    through : {
+//       model: group_request,
+//       unique:false,
+//       foreignKey : "requester_id"
+//    },
+// });
+
+// group.belongsTo(User, {
+//    through : {
+//       model: group_request,
+//       unique:false,
+//       foreignKey : "acceptor_id",
+//    },
+// });
+
+// group.hasMany(group_request,{
+//    foreignKey:"group_id",
+// });
+// group_request.belongsTo(group,{
+//    foreignKey:"group_id",
+// })
+
 module.exports = {
    User, friend_list, friend_request,
    group, group_member, group_request,
-   like_action, post, ImageSet, PostLike,
-   Comment
+   post, ImageSet, PostLike, Comment, 
+   Schedule
 };
