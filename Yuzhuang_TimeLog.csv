@@ -30,4 +30,7 @@ Date,Time,Description,Duration
 11/11/23,5:00pm ~ 6:00pm,try to fix xcode tracking shouldn't trcck; init the baisc view to project in main,1hours
 11/12/23,8:00pm ~ 9:00pm,proting all the feature and views from the testing project to the actual project,1hours
 11/13/23,9:00pm ~ 1:00am,impl the weeday schedule view; build another git repository for project because it was carsh and unable to open(try to fix it but not work); proted the Swiftxios tool from old project; 5hours
-11/17/23,8:00am ~ 12:00pm,fix the display not reloading error for schedule view; change the return obj of schedule; new feature for Swiftxios tools,4hours
+11/17/23,8:00am ~ 12:00pm,fix the display not reloading error for schedule view; change the return obj of schedule,4hours
+11/26/23,12:00am ~ 1:00am,setup firebase dependency and configuration file for the project,1hours
+11/26/23,1:00pm ~ 5:00pm,layout friend list subview and improve some icon in account views,4hours
+11/28/23,3:00pm ~ 8:00pm,impl delete friend feature with add new endpoint in backend and impl the feature in frontend; refaxtor the account view code for fit the delete feature,5hours
