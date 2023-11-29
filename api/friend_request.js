@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { friend_request, User,friend_list } = require("../db/models");
+const { friend_request, User, friend_list } = require("../db/models");
 const db = require("../db")
 const { Op } = require('sequelize')
 
@@ -199,6 +199,39 @@ router.get("/receiving", async (req, res, next) => {
             res.status(200).json(results)
             :res.status(404).send("Current User's Friend Request Not Found");
     }catch(error){
+        next(error);
+    }
+})
+
+// delete friend
+router.delete("/", async (req, res, next) => {
+    var current_user_id = req.query.currentUser
+    var friend_id =  req.query.friend
+    try{
+        const results = await db.transaction(async t =>{
+            const results = await friend_list.destroy({
+                where: {
+                    [Op.or] : [
+                        {
+                            ownerid : current_user_id,
+                            friendid : friend_id
+                        }, 
+                        {
+                            ownerid : friend_id,
+                            friendid : current_user_id
+                        }
+                    ]
+                }
+            });
+
+            return results
+        })
+
+        results ?
+        res.status(200).json(results)
+        :res.status(404).send("Current User's Friend Delete Failed");
+    } catch(error) {
+        res.status(500).json({message : error.message});
         next(error);
     }
 })
