@@ -37,4 +37,5 @@ Date,Time,Description,Duration
 11/26/2023. 01:30pm~04:30pm, Worked on the styling and layout of the post detail view and refactored the codes for posts view, 3 hours
 11/28/2023，12:00pm~07:30pm, Completed the layout of the post detail view, attempted to overlay the subviews in full screen onto the content view, and attempted to modify the tab view to a flexible size, 7:30 hours
 11/29/2023, 07:00pm~12:00am, Completed layout and functionality of the comments and reply, 5 hours
+11/30/2023, 11:30am~03:30pm, updated the post/singleView endpoint & comment model, and updated comment feature to allow users to reply to otehr's response, 4 hours
 
