@@ -51,9 +51,13 @@ router.get("/singleView", async (req, res, next) => {
         {
           model: Comment,
           include: [
+            { model: User, attributes: ['id','username'] },
             {
               model: Comment,
-              as: 'reply_comment'
+              as: 'reply_comment',
+              include: [
+                { model: User, attributes: ['id','username'] }
+              ]
             }],
             required: false,
           // where:{reply_comment_id:{[Op.is]:null}}
