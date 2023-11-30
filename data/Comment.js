@@ -24,7 +24,7 @@ const CommentSeed = [
         onwer_id : 6,
         post_id: 1,
         contents: "这个是个测试",
-        replyied_to: "Kaifeng99890@gmail.com",
+        replied_to: "Kaifeng99890@gmail.com",
         reply_comment_id:1
     },
  ];

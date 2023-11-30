@@ -47,8 +47,8 @@ const Comment = db.define('comment', {
          notEmpty : true
       }
    },
-   
-   replyied_to : {
+
+   replied_to : {
       type : DataTypes.STRING,
       allowNull : true,
    },
