@@ -61,6 +61,10 @@ router.post("/createRequest", async (req, res, next) => {
         const currentUser_id = req.body.requester;
         const targetUser_id = req.body.accepter;
 
+        if (currentUser_id == targetUser_id) {
+            throw new Error
+        }
+
         const results = await db.transaction(async (t) => {
             const requester = await User.findOne({
                 where:{id:currentUser_id} 
@@ -100,7 +104,7 @@ router.post("/createRequest", async (req, res, next) => {
                 transaction : t
             }).then((results) => {
                 if (results) {
-                    res.status(400);
+                    // res.status(400);
                     throw new Error("friend already exists");
                 }
             });
@@ -111,7 +115,7 @@ router.post("/createRequest", async (req, res, next) => {
             }, {
                 transaction : t
             }).catch(error => {
-                res.status(400);
+                // res.status(400);
                 error.message = "friend already request"
                 throw error;
             });
@@ -124,7 +128,7 @@ router.post("/createRequest", async (req, res, next) => {
             :res.send("Current User's Friend Request Not Found");
     }catch(error){
         console.error("error -> ", error);
-        res.send({message : error.message});
+        res.send({message : error.message}); // {message : "error"}
         next(error);
     }
 })
