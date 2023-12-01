@@ -34,3 +34,4 @@ Date,Time,Description,Duration
 11/26/23,12:00am ~ 1:00am,setup firebase dependency and configuration file for the project,1hours
 11/26/23,1:00pm ~ 5:00pm,layout friend list subview and improve some icon in account views,4hours
 11/28/23,3:00pm ~ 8:00pm,impl delete friend feature with add new endpoint in backend and impl the feature in frontend; refaxtor the account view code for fit the delete feature,5hours
+11/30/23,6:00pm ~ 1:00am,impl search and request add to friend feature with fetch backend data; impl the view of search and request friend,7hours
