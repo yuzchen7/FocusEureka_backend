@@ -19,7 +19,14 @@ const CommentSeed = [
         onwer_id : 3,
         post_id: 1,
         contents: "testing testing"
-    }
+    },
+    {
+        onwer_id : 6,
+        post_id: 1,
+        contents: "这个是个测试",
+        replied_to: "Kaifeng99890@gmail.com",
+        reply_comment_id:1
+    },
  ];
  
  module.exports = CommentSeed;

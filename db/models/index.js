@@ -40,6 +40,9 @@ Comment.hasMany(Comment, {
    allowNull: true,
 });
 
+Comment.belongsTo(User,{foreignKey: 'onwer_id'});
+User.hasMany(Comment,{foreignKey: 'onwer_id'});
+
 post.belongsTo(User,{as:'owner',foreignKey:'ownerid'});
 User.hasMany(post,{foreignKey:'ownerid'});
 

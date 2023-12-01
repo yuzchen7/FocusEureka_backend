@@ -47,6 +47,11 @@ const Comment = db.define('comment', {
          notEmpty : true
       }
    },
+
+   replied_to : {
+      type : DataTypes.STRING,
+      allowNull : true,
+   },
 });
 
 module.exports = Comment;
