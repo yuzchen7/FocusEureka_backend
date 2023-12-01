@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const db = require("../db");
+const { Op } = require('sequelize');
 const { User, friend_list, friend_request, group, group_member } = require("../db/models");
 
 router.get("/", async (req, res, next) => {
@@ -19,6 +20,25 @@ router.get("/findUser", async (req, res, next) => {
     const username = req.query.username;
     console.log(username);
     const foundUser = await User.findOne({ where: { username: username } });
+    foundUser
+      ? res.status(200).json(foundUser)
+      : res.status(404).send("User Not Found");
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/findUserAll", async (req, res, next) => {
+  try {
+    const username = req.query.username;
+    console.log('%' + username + '%');
+    const foundUser = await User.findAll({ 
+      where: { 
+        username: {
+          [Op.like]: '%' + username + '%'
+        }
+      } 
+    });
     foundUser
       ? res.status(200).json(foundUser)
       : res.status(404).send("User Not Found");
