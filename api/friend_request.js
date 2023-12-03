@@ -172,10 +172,10 @@ router.post("/acceptRequest", async (req, res, next) => {
             return deleteRequest;
         });
         results?
-            res.status(200).json(results)
-            :res.status(404).send("Current User's Friend Request Not Found");
+            res.status(200).json({result: true})
+            :res.status(404).send({result: false, message : "Current User's Friend Request Not Found"});
     }catch(error){
-        res.status(500).json({message : error.message});
+        res.status(500).json({result: false, message : error.message});
         next(error);
     }
 })
