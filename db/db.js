@@ -8,6 +8,7 @@ const db = new Sequelize(
       logging: false,
    }
 );
+// const db = new Sequelize(process.env.POSTGRES_URL+ "?sslmode=require",);
 
 db.authenticate().then(() => {
    console.log("Connection has been established successfully.");
