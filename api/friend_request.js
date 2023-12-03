@@ -240,4 +240,28 @@ router.delete("/", async (req, res, next) => {
     }
 })
 
+router.delete("/rejectRequest", async (req, res, next) => {
+    var current_user_id = req.query.currentUser
+    var sender_id =  req.query.sender
+    try{
+        const results = await db.transaction(async t =>{
+            const results = await friend_request.destroy({
+                where: {
+
+                    ownerid: sender_id,
+                    targetid: current_user_id
+                }
+            });
+
+            return results
+        })
+
+        results ?
+        res.status(200).json(results)
+        :res.status(404).send("Current user rejcet friend_request Failed");
+    } catch(error) {
+        res.status(500).json({message : error.message});
+        next(error);
+    }
+})
 module.exports = router;
