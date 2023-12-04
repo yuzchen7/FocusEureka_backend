@@ -39,4 +39,4 @@ Date,Time,Description,Duration
 11/29/2023, 07:00pm~12:00am, Completed layout and functionality of the comments and reply, 5 hours
 11/30/2023, 11:30am~03:30pm, updated the post/singleView endpoint & comment model, and updated comment feature to allow users to reply to otehr's response, 4 hours
 12/1/2023, 01:00pm~04:00pm, updated comment feature to allow users to expand or hide replies, added display of the posting date and time, and replaced the textfield for date & time with datePicker, 3 hours
-
+12/2/2023, 10:00pm~11:00pm, setup remote database through Vercel, deployed backtend using Render, and implemented an endpoint that rejects friend request, 1 hour
