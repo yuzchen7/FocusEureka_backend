@@ -161,7 +161,8 @@ router.post("/Likes", async (req, res, next) => {
     const likesData = req.body;
     const LikesExisted = await PostLike.findOne({where: { user_id: likesData.user_id, post_id: likesData.post_id }});
     if(LikesExisted){
-      res.status(208).send({message: "Your Like has been sent"})
+      const disLikes = await PostLike.destroy({where: { user_id: likesData.user_id, post_id: likesData.post_id }})
+      res.status(200).json({message : disLikes})
     }else{
     const likes = await PostLike.create(likesData);
     likes
