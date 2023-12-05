@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { where } = require('sequelize');
 const { post, User, ImageSet, Comment, PostLike } = require("../db/models");
 
 const user_arrtibutes_filter = ['id', 'first_name', 'last_name', 'middle_name', 'username'];
@@ -158,10 +159,15 @@ router.get("/currentUser", async (req, res, next) => {
 router.post("/Likes", async (req, res, next) => {
   try{
     const likesData = req.body;
+    const LikesExisted = await PostLike.findOne({where: { user_id: likesData.user_id, post_id: likesData.post_id }});
+    if(LikesExisted){
+      res.status(208).send({message: "Your Like has been sent"})
+    }else{
     const likes = await PostLike.create(likesData);
     likes
       ? res.status(200).json(likes)
       : res.status(404).send("your likes is gone~~~");
+    }
   }catch (error) {
     next(error);
   }
