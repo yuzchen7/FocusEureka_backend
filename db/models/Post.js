@@ -21,7 +21,7 @@ const post = db.define("posts", {
    },
 
    contents : {
-      type : DataTypes.STRING,
+      type : DataTypes.TEXT,
       allowNull : true
    },
 
