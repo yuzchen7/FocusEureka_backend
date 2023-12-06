@@ -79,7 +79,12 @@ router.get("/user", async (req, res, next) => {
   try {
 
     const userId = req.query.userId;
-    const currentUserPosts = await post.findAll({ include: ImageSet, where: { ownerid: userId } });
+    const currentUserPosts = await post.findAll({ 
+      include: [{ model: ImageSet },
+      { model: User, as: 'owner', attributes: user_arrtibutes_filter },
+      { model: PostLike, include: [{ model: User, attributes: user_arrtibutes_filter }] }],
+      order: [['id', 'DESC']],
+      where: { ownerid: userId } });
 
     currentUserPosts
       ? res.status(200).json(currentUserPosts)
