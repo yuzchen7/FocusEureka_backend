@@ -1,15 +1,13 @@
 const GroupRequestSeed = [
    {
-      request_id : 4,
+      requester_id : 4,
+      acceptor_id : 1,
       group_id : 1
    },
    {
-      request_id : 2,
+      requester_id : 4,
+      acceptor_id : 2,
       group_id : 2
-   },
-   {
-      request_id : 4,
-      group_id : 1
    },
 ];
 
