@@ -60,7 +60,7 @@ const setupRoutes = () => {
 };
 
 const runServer = async (port) => {
-   await db.sync({ force: true }); // test purpose only
+   await db.sync({ force: false }); // test purpose only
    app.listen(port, () => {
       console.log(`API listening on PORT 8080`);
    });
