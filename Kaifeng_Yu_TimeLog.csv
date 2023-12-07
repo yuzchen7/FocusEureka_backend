@@ -44,3 +44,4 @@ Date,Time,Description,Duration
 12/4/2023, 03:30pm~05:00pm, updated the layout for the post detail view and fix tab view display error, 1.5 hours
 12/5/2023, 01:00pm~04:00pm, researched and implemented Swiftui mapkit to display locations indicated by posts, 3 hours
 12/5/2023, 07:00pm~1:30pm, Implemented the display of posts in user and friend's profile view, Updated one backend endpoint, fixed navigationLink stacking bug and unwrapped error, and resolved merge conflicts, 6.5 hours
+12/6/2023, 04:00pm~05:00pm, Fixed image redundancy bug when posting and sequlize error for limited input length, 1 hour
