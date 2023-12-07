@@ -37,3 +37,4 @@ Date,Time,Description,Duration
 11/30/23,6:00pm ~ 1:00am,impl search and request add to friend feature with fetch backend data; impl the view of search and request friend,7hours
 12/03/23,6:00pm ~ 1:00am,impl accept and reject friend request from others;auto update friend list; update Swiftxios tools with singleton design pattern; add more content into presentation slide,7hours
 12/05/23,6:00pm ~ 10:00am,impl other user view for checkout friend's account page; add sheet for map; fix some of the small bugs,4hours
+12/07/23,1:00pm ~ 2:00pm,chenge some of the button view; replace the local url to deployed url,1hours
