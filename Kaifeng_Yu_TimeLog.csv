@@ -1,0 +1,51 @@
+Date,Time,Description,Duration
+9/5/2023, 01:00pm~03:00pm, Worked with Yuzhuang Chen via zoom to discuss in depth about the project objective and the feature that we want to implement to the app, 2 hours
+9/6/2023, 03:40pm~06:40pm, Brainstormed the feature we want to add to the app. We implemented the data flow chart using Figma, which concluded the design for the app including the pages and features, 3 hours
+9/7/2023, 10:00am~04:00pm, worked on the ER Diagram for the app. We discuss in depth regarding how to design and implement the models for our database. This included what tables may be needed, their relationships, and considerations for efficiency, 6 hours
+9/9/2023, 10:00am~02:00pm, Worked as a group on designing the app's framework, including the view and navigation of the pages, 4 hours
+9/12/2023, 01:00pm~03:00pm, worked on Setup github repository, backend server (import necessary dependency and scripts), postman, postgres, and etc, 2 hours
+9/13/2023, 02:00pm~06:00pm, worked on the user’s login/signup using passport.js. Config cors and passport.js setting, 4 hours
+9/14/2023, 10:00am~04:00pm, Finished the implementation of the passport.js and done some unit testing through postman, which found a error and successfully resolved. Starting working on the setup of user related endpoint, 6 hours
+9/16/2023, 12:00pm~04:00pm, Implemented 4 user related endpoint using Sequelize and done the unit testing through postman for the functionality of each endpoint. Attempted to debug an sequelizeEagerLoadingError, 4 hours
+9/18/2023, 06:00pm~10:00pm, Worked in group on debugging the sequelizeEagerLoadingError and implementation of friend list endpoint, 4 hours
+9/21/2023, 03:00pm~05:00pm, Attempted to implement endpoints related to posts. Created some dummy data for the post into seed file and set up the route for post endpoints. And organized all previously completed endpoints into postman for easy access, 2 hours
+9/22/2023, 10:00am~04:00pm, Attempted to update the delete user endpoint, but failed due to constraint error. Implemented 4 friend request related endpoints, 6 hours
+9/24/2023, 01:00pm~04:00pm, Implemented an endpoint that retrieves all friend requests received by the current user, 3 hours
+9/27/2023, 06:00pm~10:00pm, Implemented 4 endpoints that are related to the post model. Each endpoint was tested through postman to ensure no errors, 4 hours
+9/29/2023, 10:00am~04:00pm, Created dummy data for the image set model and set up associations with the user and posts models. And updated endpoints associated with posts so that users can retrieve images of posts from the image set model, 6 hours
+9/30/2023, 01:00pm~04:00pm, Created dummy data for the comment model and set up associations with the comment and posts models. And updated endpoints related to posts model so that users can retrieve comments under each post from comment models, 3 hours
+10/2/2023, 03:00pm~06:00pm, Updated endpoints related to post models (retrieve replies to each comment under a post) and discussed how to redesign likeAction and the weekly schedule models ,3 hours
+10/3/2023, 12:00pm~03:00pm, modified the association between user and psots models and completed the endpoints related to post models (retrieve data for Likes), each endpoints are repeatedly tested through Postman, 3 hours 
+10/4/2023, 04:00pm~08:00pm, modified two endpoints related to post models, implemented three endpoints related to comments models, debugged posts/signView endpoint, 4 hours
+10/5/2023, 12:00pm~04:00pm, Assisted in redesign of the group request model, debugged two errors related to friend request and signup endpoints, and implemented three endpoints related to schedule models, 4 hours
+10/8/2023, 12:00pm~03:00pm, Implemented one endpoint related to schedule model, debugged unique constraint error, and attempted to debug assocciation error related to group request model, 3 hours
+10/13/2023, 10:00pm~12:00am, Learned and practiced swift types, variables, array, set, dictionary, and functions, 2 hours
+10/14/2023, 10:00am~01:00pm, learned and praticed swift enum, operators, optionals, self, class, for loop, and inheritance, 3 hours
+10/14/2023, 02:00pm~06:00pm, Implemented two endpoints related to schedule model and prepare for Swift development, 4 hours 
+10/15/2023, 01:00pm~05:00pm, learned and praticed swift storyboard and intro to UIkit, 4 hours
+10/18/2023, 01:00pm~03:00pm, Continued on learning and practice swift storyboard and Uikit, 2 hours
+10/19/2023, 01:00pm~05:00pm, Leanred and praticed programmatic way of implementing swift view and UIkit, and learned few overview of SwiftUI, 4 hours
+10/20/2023, 11:00am~01:00pm, Started on learning and practice SwiftUI. I learned the z-stack, v-stack, h-stack,button, struct of subview, and basic @state & @binding, 2 hours
+10/20/2023, 02:00pm~05:00pm, Learned about environment modifier & specific modifier, lazyVgrid, lazyHgrid, observable object, passing data, and concept of MVVM (Model, View, Model View), 3 hours
+10/21/2023, 01:00pm~02:00pm, Continued with the tutorials I didn't finish yesterday, refactoring the code from grid scrolling view to list view. Learned navigation stack and new features for button, 1 hour
+10/21/2023, 03:00pm~06:30pm, Learned network calling, error handling, alert, tab view, observeable object & @published for updating view, and loading view in SwiftUI, 3:30 hours
+10/22/2023, 03:00pm~06:00pm, learned some format styles included overlay, shadow, and blur effects. Also learned form container, toggle button, AppdefaultStorage, text validation through regex, and environment modifier in SwiftUI, 3 hours
+10/24/2023, 07:00pm~10:00pm, Learned network calling in SwiftUI through async & awai, @FocusState, review of data flow and ...etc, 3 hours
+10/26/2023, 08:00pm~10:00pm, updated endpoints related to auth/, review async & await, and learned pagination, 2 hours
+10/27/2023, 05:00pm~10:00pm, Implemented an endpoint related to posts and completed working code that successfully fetches data from localhost backend, 5 hours
+10/29/2023, 07:00pm~10:00pm, Leanred how to use Github with Xcode and how to send data to the backend. worked on displaying images on the posts view, 3 hours
+11/2/2023, 07:00pm~10:30pm, Add styling to posts view and created post detail view that can redirect from posts view, 3:30 hours
+11/3/2023, 01:00pm~02:00pm, Assisted and debugged network request errors, 1 hour
+11/3/2023, 08:00pm~11:30pm, Refactored code and researched how to upload images and store them in Firebase, 3:30 hours
+11/4/2023, 07:00pm~10:30pm, Worked on presentation slide and try to improve the layout of views, 3:30 hours
+11/5/2023, 02:00pm~06:00pm, Completed the functionality of displaying a single post view and the basic setup of the photo picker, 4 hours
+11/8/2023, 07:00pm~10:30pm, completed the functionality of image selection and upload them to Firebase storage, 3:30 hours
+11/10/2023, 01:00pm~07:00pm, Transfer all usable code to the new repository, search for how to add a .gitignore file to Xcode projects, and complete the functionality of getting the url from Firebase, 6 hours
+11/11/2023, 04:00pm~08:00pm, research and modify firebase api call from synchronous to asynchronous, 4 hours
+11/16/2023, 06:00pm~11:30pm, transferred all usable code to the new repository for 2nd time, spend some time resolving merge conflicts and completed the functionality for creating posts, 5:30 hours
+11/17/2023, 06:00pm~9:30pm, Added functionality of dismissing keyboard & Likes, researched on pinterest grid view, 3:30 hours
+11/18/2023, 07:00pm~10:00pm, formated the layout of post view into pinterest gride view, increased the amount of dummy data, encountered a bug related to photopicker and successfully resloved, 3 hours
+11/19/2023, 04:30pm~07:30pm, refactored pinterest gride view into a component, add style and format post view & post detail view, and created a component for comments, 3 hours
+11/22/2023, 06:00pm~11:00pm, Attempted to update the total number of likes of a post without refreshing the view, 5 hours
+11/23/2023, 05:00pm~09:00pm, Completed the functionality of updating the view without refreshing/reloading and fixed the issue of resetting the position of scrolling view, 4 hours
+11/25/2023, 06:00pm~9:00pm, completed the feature that allows users to switch post types within the posts view, 3 hours

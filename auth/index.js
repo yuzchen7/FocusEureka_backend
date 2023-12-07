@@ -39,14 +39,17 @@ router.post("/signup", async (req, res, next) => {
         // new code to be added on, but since i add the unique limitation
         // in the db model, the following 2line of code are become 
         // unnecessary
-        const check = await User.findOne({ where: { username: username}});
-        if (check !== null) {throw new SequelizeUniqueConstraintError}
+        const check = await User.findOne({ where: { username: username } });
+        if (check !== null) { throw new SequelizeUniqueConstraintError }
 
         const user = await User.create(req.body);
 
         // Passport js method on request
         req.login(user, (err) =>
-            err ? next(err) : res.status(200).json({ username: user.username, id: user.id })
+            err ? next(err) : res.status(200).json({
+                id: user.id, username: user.username, first_name: user.first_name,
+                middle_name: user.middle_name, last_name: user.last_name
+            })
         );
     } catch (error) {
         if (error.name === "SequelizeUniqueConstraintError") {
@@ -60,8 +63,11 @@ router.post("/signup", async (req, res, next) => {
 router.post("/login", passport.authenticate("local"),
     function (req, res, next) {
         res.status(200).json({
-            username: req.user.username,
             id: req.user.id,
+            username: req.user.username,
+            first_name: req.user.first_name,
+            middle_name: req.user.middle_name,
+            last_name: req.user.last_name,
         });
     }
 );
@@ -79,12 +85,16 @@ router.post("/logout", (req, res, next) => {
 
 // auth/me
 router.post("/me", async (req, res, next) => {
+    console.log(req)
     try {
         if (!req.user) {
             return;
         }
         const foundUser = await User.findOne({ where: { username: req.user.username } });
-        res.status(200).json(foundUser);
+        res.status(200).json({
+            id: foundUser.id, username: foundUser.username, first_name: foundUser.first_name,
+            middle_name: foundUser.middle_name, last_name: foundUser.last_name
+        });
     } catch (error) {
         console.error(error);
     }

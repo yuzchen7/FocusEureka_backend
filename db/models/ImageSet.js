@@ -3,7 +3,7 @@ const db = require("../db");
 
 const post = require("./Post");
 
-const ImageSet = db.define("imaga_sets", {
+const ImageSet = db.define("image_sets", {
    post_id : {
       type: DataTypes.INTEGER,
       primaryKey: true,
