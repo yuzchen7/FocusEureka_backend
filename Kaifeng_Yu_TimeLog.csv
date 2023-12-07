@@ -48,4 +48,15 @@ Date,Time,Description,Duration
 11/19/2023, 04:30pm~07:30pm, refactored pinterest gride view into a component, add style and format post view & post detail view, and created a component for comments, 3 hours
 11/22/2023, 06:00pm~11:00pm, Attempted to update the total number of likes of a post without refreshing the view, 5 hours
 11/23/2023, 05:00pm~09:00pm, Completed the functionality of updating the view without refreshing/reloading and fixed the issue of resetting the position of scrolling view, 4 hours
-11/25/2023, 06:00pm~9:00pm, completed the feature that allows users to switch post types within the posts view, 3 hours
+11/25/2023, 06:00pm~09:00pm, completed the feature that allows users to switch post types within the posts view, 3 hours
+11/26/2023. 01:30pm~04:30pm, Worked on the styling and layout of the post detail view and refactored the codes for posts view, 3 hours
+11/28/2023，12:00pm~07:30pm, Completed the layout of the post detail view, attempted to overlay the subviews in full screen onto the content view, and attempted to modify the tab view to a flexible size, 7:30 hours
+11/29/2023, 07:00pm~12:00am, Completed layout and functionality of the comments and reply, 5 hours
+11/30/2023, 11:30am~03:30pm, updated the post/singleView endpoint & comment model, and updated comment feature to allow users to reply to otehr's response, 4 hours
+12/1/2023, 01:00pm~04:00pm, updated comment feature to allow users to expand or hide replies, added display of the posting date and time, and replaced the textfield for date & time with datePicker, 3 hours
+12/2/2023, 10:00pm~11:00pm, setup remote database through Vercel, deployed backtend using Render, and implemented an endpoint that rejects friend request, 1 hour
+12/3/2023, 01:40pm~03:40pm, resolved merge conflict and fixed damged xcodeProj file, 2 hours
+12/4/2023, 03:30pm~05:00pm, updated the layout for the post detail view and fix tab view display error, 1.5 hours
+12/5/2023, 01:00pm~04:00pm, researched and implemented Swiftui mapkit to display locations indicated by posts, 3 hours
+12/5/2023, 07:00pm~1:30pm, Implemented the display of posts in user and friend's profile view, Updated one backend endpoint, fixed navigationLink stacking bug and unwrapped error, and resolved merge conflicts, 6.5 hours
+12/6/2023, 04:00pm~05:00pm, Fixed image redundancy bug when posting and sequlize error for limited input length, 1 hour

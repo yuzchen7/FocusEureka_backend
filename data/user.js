@@ -27,7 +27,7 @@ const UserSeed = [
       first_name: "Shuan",
       last_name: "Vance",
       username: "Vance_Shuan7789@gmail.com",
-      password: " ",
+      password: "000000",
    },
    {
       first_name: "Jenna",

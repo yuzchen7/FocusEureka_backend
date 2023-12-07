@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { where } = require('sequelize');
 const { post, User, ImageSet, Comment, PostLike } = require("../db/models");
 
 const user_arrtibutes_filter = ['id', 'first_name', 'last_name', 'middle_name', 'username'];
@@ -78,7 +79,12 @@ router.get("/user", async (req, res, next) => {
   try {
 
     const userId = req.query.userId;
-    const currentUserPosts = await post.findAll({ include: ImageSet, where: { ownerid: userId } });
+    const currentUserPosts = await post.findAll({ 
+      include: [{ model: ImageSet },
+      { model: User, as: 'owner', attributes: user_arrtibutes_filter },
+      { model: PostLike, include: [{ model: User, attributes: user_arrtibutes_filter }] }],
+      order: [['id', 'DESC']],
+      where: { ownerid: userId } });
 
     currentUserPosts
       ? res.status(200).json(currentUserPosts)
@@ -158,10 +164,16 @@ router.get("/currentUser", async (req, res, next) => {
 router.post("/Likes", async (req, res, next) => {
   try{
     const likesData = req.body;
+    const LikesExisted = await PostLike.findOne({where: { user_id: likesData.user_id, post_id: likesData.post_id }});
+    if(LikesExisted){
+      const disLikes = await PostLike.destroy({where: { user_id: likesData.user_id, post_id: likesData.post_id }})
+      res.status(200).json({message : disLikes})
+    }else{
     const likes = await PostLike.create(likesData);
     likes
       ? res.status(200).json(likes)
       : res.status(404).send("your likes is gone~~~");
+    }
   }catch (error) {
     next(error);
   }
