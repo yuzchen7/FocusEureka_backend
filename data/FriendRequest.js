@@ -17,6 +17,11 @@ const FriendRequestSeed = [
    { 
       ownerid : 3,
       targetid : 5
+   },
+   
+   {
+      ownerid: 3,
+      targetid : 2
    }
 ];
 
